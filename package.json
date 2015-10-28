@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/chaosddp/rpgmakermv.lib.d.ts",
   "devDependencies": {
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0"
   }
 }
