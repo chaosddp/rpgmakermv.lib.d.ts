@@ -957,6 +957,277 @@ interface String{
 	 */
 	padZero(length:number):string;
 }
+/**显示2D游戏的元件地图。 */
+declare class Tilemap{
+	
+	/**
+	 * 向容器中添加一个子对象。
+	 * 
+	 * @param {Object} child 要添加的子对象。
+	 * @return {Object} 被添加的子对象。
+	 */
+	addChild ( child:Object ):Object;
+	
+	/**
+	 * 在容器指定索引处添加一个子对象。
+	 * 
+	 * @param {Object} child 要添加的子对象。
+	 * @param {number} index 欲添加到的位置索引。
+	 * @return {Object} 被添加的子对象。
+	 */
+	addChildAt ( child:Object,  index:number ) :Object;
+	
+	/**
+	 * 检查是否准备场景渲染。
+	 * 
+	 * @return {boolean} 准备渲染返回真。
+	 */
+	isReady ():boolean;
+	
+	/**重绘整个元件地图。 */
+	refresh ();
+	
+	/**
+	 * 从容器中移除一个子对象。
+	 * 
+	 * @param {Object} child 要别移除的子对象。
+	 * @return {Object} 被移除的子对象。
+	 */
+	removeChild ( child:Object ) :Object;
+	
+	/**
+	 * 移除指定索引的子对象。
+	 * 
+	 * @param {number} index 要移除的子对象的索引。
+	 * @return {Object} 被移除的子对象。
+	 */
+	removeChildAt ( index:number ):Object;
+	
+	/**
+	 * 设置元件地图数据。
+	 * 
+	 * @param {number} width 地图横向元件数。
+	 * @param {number} height 地图纵向元件数。
+	 * @param {number} data 地图信息的三维数组
+	 */
+	setData ( width:number,  height:number,  data:number );
+	
+	/**更新元件地图。 */
+	update ();
+	
+	/**自动元件动画计数。 */
+	animationCount:number;
+	
+	/**地图元件的位图(Bitmap)对象数组。 */
+	bitmaps:Array<Bitmap>;
+	
+	/**[只读]子精灵(Sprite)对象数组。 */
+	children:Array<Sprite>;
+	
+	/**引用标记列表。 */
+	flags:Array<any>;
+	
+	/**元件地图的高度。 */
+	height:number;
+	
+	/**是否开启元件地图的横向循环。(TODO: correct?) */
+	horizontalWrap:boolean;
+	
+	/**元件地图卷动的起始坐标。 */
+	origin:Point;
+	
+	/**[只读]元件地图的父对象。 */
+	parent: Object;
+	
+	/**元件高度。 */
+	tileHeight:number;
+	
+	/**元件宽度。 */
+	tileWidth:number;
+	
+	/**是否开启元件地图的垂直循环。 */
+	verticalWrap:boolean;
+	
+	/**元件地图宽度。 */
+	width:number;
+}
+/**以平铺方式显示图片的精灵对象。 */
+declare class TilingSprite{
+	/**
+	 * @param {Bitmap} bitmap 需要平铺显示的图片
+	 */
+	constructor(bitmap:Bitmap);
+	
+	/**
+	 * 统一设置 x 坐标，y 坐标，宽度，高度。
+	 * 
+	 * @param {number} x 平铺精灵的 x 坐标
+	 * @param {number} y 平铺精灵的 y 坐标
+	 * @param {number} width 平铺精灵的宽度
+	 * @param {number} height 平铺精灵的高度
+	 */
+	move ( x:number , y:number , width:number , height:number );
+	
+	/**
+	 * 指定平铺精灵所显示位图的矩形区域。
+	 * 
+	 * @param {number} x 矩形框架的 x 坐标
+	 * @param {number} y 矩形框架的 y 坐标
+	 * @param {number} width 矩形框架的宽度
+	 * @param {number} height 矩形框架的高度
+	 */
+	setFrame ( x:number , y:number , width:number , height:number );
+	
+	/**在每一帧刷新精灵。 */
+	update ();
+	
+	/**用于平铺显示的图像。 */
+	bitmap:Bitmap;
+	
+	/**平铺精灵的不透明度(0 ~ 255)。 */
+	opacity:number;
+	
+	/*平铺精灵的原点，用于制作滚动显示效果。* */
+	origin:Point;
+	
+	/**平铺精灵的可见性。 */
+	visible:boolean;
+	
+	/**平铺精灵的 x 坐标。 */
+	x:number;
+	
+	/**平铺精灵的 y 坐标。 */
+	y:number;
+}
+/**用于WebGL的颜色矩阵滤镜。 */
+declare class ToneFilter{
+	/**
+	 * 更改色相。
+	 * 
+	 * @param {number} value 介于 -360～360 之间的色相值
+	 */
+	adjustHue ( value:number );
+	
+	/**
+	 * 更改饱和度。
+	 * 
+	 * @param {number} value 介于 -255～255 之间的饱和度值
+	 */
+	adjustSaturation ( value:number );
+	
+	/**
+	 * 更改色调。
+	 * 
+	 * @param {number} r 介于 -255～255 之间的红色值
+	 * @param {nubmer} g 介于 -255～255 之间的绿色值
+	 * @param {number} b 介于 -255～255 之间的蓝色值
+	 */
+	adjustTone ( r:number , g:number , b:number );
+	
+	/**重置滤镜。 */
+	reset ();
+}
+/**能够以2D画布模式改变屏幕颜色的精灵。 */
+declare class ToneSprite{
+	
+	/**清除色调。 */
+	reset ();
+	
+	/**
+	 * 设置色调。
+	 * 
+	 * @param {number} r 红色强度，范围为(-255, 255)
+	 * @param {number} g 绿色强度，范围为(-255, 255)
+	 * @param {number} b 蓝色强度，范围为(-255, 255)
+	 * @param {number} gray 灰度，范围为(0, 255)
+	 */
+	setTone ( r:number , g:number , b:number , gray:number );
+}
+/**处理来自鼠标和触屏输入的静态类。 */
+declare module TouchInput{
+	/**清除所有触屏输入数据。 */
+	function clear ();
+	
+	/**初始化触屏输入系统。 */
+	function initialize ();
+	
+	/** 
+	 * 检查鼠标右键是否刚刚被按下。
+	 * 
+	 * @return {boolean} 如果鼠标右键刚刚被按下，返回 true
+	*/
+	function isCancelled ():boolean;
+	
+	/**
+	 * 检查鼠标左键或者触屏是否长时间被按住。
+	 * 
+	 * @return {boolean} 如果鼠标左键或者触屏长时间被按住，返回 true
+	 */
+	function isLongPressed ():boolean;
+	
+	/**
+	 * 检查鼠标或手指在触屏上是否移动。
+	 * 
+	 * @return {boolean} 如果鼠标或手指在触屏上移动，返回 true
+	 */
+	function isMoved ():boolean;
+	
+	/**
+	 * 检查鼠标或者触屏是否在当前被按下。
+	 * 
+	 * @return {boolean} 如果鼠标或触屏在当前被按下，返回 true
+	 */
+	function isPressed ():boolean;
+	
+	/**
+	 * 检查鼠标左键是否弹起或者手指是否离开触屏。
+	 * 
+	 * @return {boolean} 如果鼠标左键弹起或者手指离开触屏，返回 true
+	 */
+	function isReleased ():boolean;
+	
+	/**
+	 * 检查鼠标左键或者触屏是否刚刚被按下，或者是伪重复按键是否发生。
+	 * 
+	 * @return {boolean} 如果鼠标左键或者触屏被重复按下，返回 true
+	 */
+	function isRepeated () :boolean;
+	
+	/**
+	 * 检查鼠标左键或者触屏是否刚刚被按下。
+	 * 
+	 * @return {boolean} 如果鼠标左键或者触屏刚刚被按下，返回 true
+	 */
+	function isTriggered () :boolean;
+	
+	/**更新触屏输入数据。 */
+	function update ();
+	
+}
+
+declare class TouchInput
+{	
+	/** [只读]最近一次输入的时间，单位为毫秒。*/
+	static date :number;
+	
+	/**连续两次伪按键重复之间的间隔时间，单位为帧。 */
+	static keyRepeatInterval :number;
+	
+	/**第一次按下按键后，距离伪按键重复发生所等待的时间，单位为帧。 */
+	static keyRepeatWait :number;
+	
+	/**[只读]水平滚动量。 */
+	static wheelX :number;
+	
+	/**[只读]垂直滚动量。 */
+	static wheelY :number;
+	
+	/**[只读]最近一次画布区域中触屏事件的 x 坐标。 */
+	static x:number;
+	
+	/**[只读]最近一次画布区域中触屏事件的 y 坐标。 */
+	static y:number;
+}
 
 /* here from Utils */
 
@@ -1021,4 +1292,344 @@ declare module Utils{
 declare class Utils{
 	/**RPG 制作大师的名称，'MV'为当前的版本。 */
 	static RPGMAKER_NAME:string;
+}
+/**显示雨、暴风雨或雪的天气效果。 */
+declare class Weather{
+	
+	/**更新天气效果。 */
+	update ();
+	
+	/**天气卷动的起始点。 */
+	origin:Point;
+	
+	/**天气强度（0~9）。 */
+	power: number;
+	
+	/**天气类型['none', 'rain', 'storm', 'snow']，对应：无、雨、暴风雨、雪。 */
+	type:string;
+}
+/**使用 Web Audio API 的音频对象。 */
+declare class WebAudio {
+	/**
+	 * @param {string} url 音频文件的地址
+	 */
+	constructor(url:string);
+	
+	/**
+	 * 添加一个当音频文件加载完成后的回调
+	 * 
+	 * @param {Function} listner 回调函数
+	 */
+	addLoadListener ( listner:Function ); 
+	
+	/**
+	 * 添加一个当音频文件播放完成后的回调
+	 * 
+	 * @param {Function} listner 回调函数
+	 */
+	addStopListener ( listner:Function );
+	
+	/**清除音频数据。 */
+	clear ();
+	
+	/**
+	 * 淡入音频。
+	 * 
+	 * @param {number} duration 淡入的时间（秒）
+	 */
+	fadeIn ( duration:number );
+	
+	/**
+	 * 淡出音频
+	 * 
+	 * @param {number} duration 淡出的时间（秒）
+	 */
+	fadeOut ( duration:number );
+	
+	/** 
+	 * 检测加载时是否有错误发生。
+	 * 
+	 * @return {boolean} 若发生错误，返回 True
+	*/
+	isError ():boolean;
+	
+	/**
+	 * 检测音频是否正在播放。
+	 * 
+	 * @return {boolean} 若正在播放，返回 True
+	 */
+	isPlaying ():boolean;
+	
+	/**
+	 * 检测音频是否已经可以开始播放。
+	 * 
+	 * @return {boolean} 若音频可以开始播放，返回 True
+	 */
+	isReady ():boolean;
+	
+	/**
+	 * 播放音频。
+	 * 
+	 * @param {boolean} loop 是否要循环播放
+	 * @param {number} offset 播放开始的时间（秒）
+	 */
+	play ( loop:boolean , offset:number );
+	
+	/**
+	 * 获取当前音频的播放位置。
+	 */
+	seek ();
+	
+	/**
+	 * 停止播放音频。
+	 */
+	stop ();
+	
+	/**音频的声场位置。 */
+	pan :number;
+	
+	/**音频的音调。 */
+	pitch:number;
+	
+	/**[只读] 音频文件的地址。 */
+	url:string;
+	
+	/**音频的音量。 */
+	volume:number;
+}
+
+declare module WebAudio{
+	/**
+	 * 检测浏览器能否播放 m4a 文件。
+	 * 
+	 * @return {boolean} 若浏览器支持播放 m4a 文件，返回 True
+	 */
+	function canPlayM4a ():boolean;
+	
+	/**
+	 * 检测浏览器能否播放 ogg 文件。
+	 * 
+	 * @return {boolean} 若浏览器支持播放 ogg 文件，返回 True
+	 */
+	function canPlayOgg ():boolean;
+	
+	/**
+	 * 初始化音频系统。
+	 * 
+	 * @param {boolean} noAudio 无声模式的标志
+	 * @return {boolean} 若音频系统能够正常使用，返回 True
+	 */
+	function initialize ( noAudio:boolean ) :boolean;
+}
+/**包含游戏的窗口层。 */
+declare class WindowLayer 
+{
+	/**
+	 * 往容器中添加一个子对象。
+	 * 
+	 * @param {Object} child 要添加的子对象。
+	 * @return {Object} 被添加的子对象。
+	 */
+	addChild ( child:Object ) :Object;
+	
+	 /**
+	  * 将子对象添加到指定索引位置。
+	  *
+	  * @param {Object} child 要添加的子对象。
+	  * @param {number} index 欲添加到的位置索引。
+	  * @return {Object} 被添加的子对象。
+	  */
+	 addChildAt ( child:Object,  index:number ) :Object;
+	 
+	 /**
+	  * 同时设置x坐标、y坐标、宽度和高度。
+	  *
+	  * @param {number} x 窗口的x坐标。
+	  * @param {number} y 窗口的y坐标。
+	  * @param {number} width 窗口的宽度。
+	  * @param {number} height 窗口的高度。
+	  */
+	 move ( x:number , y: number , width:number , height:number );
+	 
+	 /**
+	  * 从容器中移除一个子对象。
+	  *
+	  * @param {Object} child 要移除的子对象。
+	  * @return {Object} 被移除的子对象。
+	  */
+	 removeChild ( child:Object ):Object;
+	 
+	 /**
+	  * 移除指定索引处的子对象。
+	  *
+	  * @param {number} index 要移除的子对象的索引。
+	  * @return {Object} 被移除的子对象。
+	  */
+	 removeChildAt ( index:number ) :Object;
+	 
+	 /**更新窗口层。 */
+	 update ();
+	 
+	 /**[只读] 窗口层的子对象数组。 */
+	 children:Array<Object>;
+	 
+	 /**窗口层的高度。 */
+	 height:number;
+	 
+	 /**[只读]窗口层的父对象。 */
+	 parent: Object;
+	 
+	 /**窗口层的高度。 */
+	 width:number;
+	 
+	 /**窗口层的x坐标。 */
+	 x:number;
+	 
+	 /**窗口层的y坐标。 */
+	 y:number;
+}
+
+/**游戏内的窗口。 */
+ interface Window{
+	 
+	 /**
+	  * 向容器添加一个子对象。
+	  *
+	  * @param {Object} child 要添加的子对象。
+	  * @return {Object} 被添加的子对象。
+	  */
+	 addChild ( child:Object ):Object;
+	 
+	 /**
+	  * 将子对象添加到指定索引位置。
+	  *
+	  * @param {Object} child 要添加的子对象。
+	  * @param {number} index 欲添加到的位置索引。
+	  * @return {Object} 被添加的子对象。
+	  */
+	 addChildAt ( child:Object,  index:number ) :Object;
+	 
+	 /**
+	  * 添加一个子对象于内容和背景之间。
+	  *
+	  * @param {Object} child 要添加的子对象。
+	  * @return {Object} 被添加的子对象。
+	  */
+	 addChildToBack ( child:Object ):Object;
+	 
+	 /** 
+	  *如果窗口被成功关闭（窗口的开启程度为0），则返回 true 。
+	 */
+	 isClosed ():boolean;
+	 
+	 /** 如果窗口被成功打开（窗口的开启程度为255），则返回 true 。*/
+	 isOpen ():boolean;
+	 
+	 /**
+	  * 同时设置x坐标、y坐标、宽度和高度。
+	  *
+	  * @param {number} x 窗口的x坐标。
+	  * @param {number} y 窗口的y坐标。
+	  * @param {number} width 窗口的宽度。
+	  * @param {number} height 窗口的高度。
+	  */
+	 move ( x:number , y: number , width:number , height:number );
+	
+	 /**
+	  * 从容器中移除一个子对象。
+	  *
+	  * @param {Object} child 要移除的子对象。
+	  * @return {Object} 被移除的子对象。
+	  */
+	 removeChild ( child:Object ):Object;
+	 
+	 /**
+	  * 移除指定索引处的子对象。
+	  *
+	  * @param {number} index 要移除的子对象的索引。
+	  * @return {Object} 被移除的子对象。
+	  */
+	 removeChildAt ( index:number ) :Object;
+	 
+	 /**
+	  * 设置光标存放区域。
+	  *
+	  * @param {number} x 光标的x坐标。
+	  * @param {number} y 光标的y坐标。
+	  * @param {number} width 光标的宽度。
+	  * @param {number} height 光标的高度。
+	  */
+	 setCursorRect ( x:number , y:number , width:number , height:number );
+	 
+	 /**
+	  * 改变背景的色调。
+	  *
+	  * @param {number} r 介于(-255, 255)之间的红色值。
+	  * @param {number} g 介于(-255, 255)之间的绿色值。
+	  * @param {number} b 介于(-255, 255)之间的蓝色值
+	  */
+	 setTone ( r:number , g:number , b:number );
+	 
+	 /**更新窗口。 */
+	 update ();
+	 
+	 /**光标闪烁的状态。 */
+	 active :boolean;
+	 
+	 /**窗口背景的不透明度（0~255）。 */
+	 backOpacity :number;
+	 
+	 /**[只读]窗口的子对象数组。 */
+	 children :Array<Object>;
+	 
+	 /**窗口内容的引用位图。 */
+	 contents :Bitmap;
+	 
+	 /**窗口内容的不透明度（0~255）。 */
+	 contentsOpacity : number;
+	 
+	 /**下滚箭头的可见性。 */
+	 downArrowVisible  :number;
+	 
+	 /**窗口的高度。 */
+	 height: number;
+	 
+	 /**窗口的外边距。 */
+	 margin:number;
+	 
+	 /**窗口的不透明度（0~255）。 */
+	 opacity :number;
+	 
+	 /**窗口的开启程度（0~255）。 */
+	 openness :number;
+	 
+	 /**窗口滚动的初始点。 */
+	 origin :Point;
+	 
+	 /**窗口框架与内容之间的填充宽度（内边距）。 */
+	 padding :number;
+	 
+	 /**[只读]窗口的父对象。 */
+	 parent :Object;
+	 
+	 /**暂停标记的可见性。 */
+	 pause :boolean;
+	 
+	 /** 上滚箭头的可见性。*/
+	 upArrowVisible :boolean;
+	 
+	 /**窗口的可见性。 */
+	 visible :boolean;
+	 
+	 /**窗口的宽度。 */
+	 width :number;
+	 
+	 /**窗口外观的引用位图。 */
+	 windowskin :Bitmap;
+	 
+	 /**窗口的x坐标。 */
+	 x:number;
+	 
+	 /**窗口的y坐标。 */
+	 y:number;
 }
