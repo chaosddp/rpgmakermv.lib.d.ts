@@ -1,0 +1,22 @@
+{
+  "name": "rpgmakervm.lib.d.ts",
+  "version": "1.0.0",
+  "description": "ts definition of rpg maker vm ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chaosddp/rpgmakermv.lib.d.ts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chaosddp/rpgmakermv.lib.d.ts/issues"
+  },
+  "homepage": "https://github.com/chaosddp/rpgmakermv.lib.d.ts",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  }
+}
