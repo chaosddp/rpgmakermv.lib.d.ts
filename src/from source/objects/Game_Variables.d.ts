@@ -1,0 +1,1 @@
+declare class Game_Variables{}

@@ -120,7 +120,8 @@
 	 padding :number;
 	 
 	 /**[只读]窗口的父对象。 */
-	 parent :Object;
+	 // remove this temp
+	 // parent :Object; 
 	 
 	 /**暂停标记的可见性。 */
 	 pause :boolean;

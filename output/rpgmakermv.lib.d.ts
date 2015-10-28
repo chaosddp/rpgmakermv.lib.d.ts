@@ -1610,7 +1610,8 @@ declare class WindowLayer
 	 padding :number;
 	 
 	 /**[只读]窗口的父对象。 */
-	 parent :Object;
+	 // remove this temp
+	 // parent :Object; 
 	 
 	 /**暂停标记的可见性。 */
 	 pause :boolean;
@@ -1633,3 +1634,1147 @@ declare class WindowLayer
 	 /**窗口的y坐标。 */
 	 y:number;
 }
+/**角色数据的JSON。 */
+declare class $Actor{
+	/** 横版战斗的战斗图文件名。*/
+	battlerName :string;
+	
+	/**角色的行走图索引。 */
+	characterIndex :number;
+	
+	/**角色的行走图（文件名）。 */
+	characterName :string;
+	
+	/**职业ID。 */
+	classId :number;
+	
+	/**初始装备。(TODO: type?) */
+	equips:Array<any>;
+	
+	/**脸图的索引。 */
+	faceIndex :number;
+	
+	/**脸图的文件名。 */
+	faceName :string;
+	
+	/**角色ID。 */
+	id:number;
+	
+	/**初始等级。 */
+	initialLevel :number;
+	
+	/**最大等级。 */
+	maxLevel :number;
+	
+	/**角色名称。 */
+	name:string;
+	
+	/**角色称号。(昵称？) */
+	nickname :string;
+	
+	/**备注。 */
+	note:string;
+	
+	/**人物简介 */
+	profile :string;
+	
+	/**由 "特性" 数据组成的数组。 */
+	traits:Array<$Trait>;
+}
+/**动画数据的JSON。 */
+declare class $Animation{
+	
+	/**第一张动画图片的色相改变值。 */
+	animation1Hue : number;
+	
+	/**第一张动画图片的文件名。 */
+	animation1Name :string;
+	
+	/**第二张动画图片的色相改变值。 */
+	animation2Hue :number;
+	
+	/**第二张动画图片的文件名。 */
+	animation2Name:string;
+	
+	/**包含每一帧动画内容的三维数组。 (TODO: type?) */
+	frames :Array<any>;
+	
+	/**动画ID。 */
+	id:number;
+	
+	/**动画名称。 */
+	name: string;
+	
+	/**动画显示位置。 */
+	position: number;
+	
+	/**由 声效与闪烁效果 数据组成的数组。 (TODO: correct?) */
+	timings :Array<AnimationTiming>;
+
+}
+/**声效和闪烁效果数据的JSON。 */
+declare class AnimationTiming{
+	
+	/**闪烁颜色。 (TODO: type?) */
+	flashColor :Array<any>;
+	
+	/**闪烁持续时间。 */
+	flashDuration :number;
+	
+	/** 闪烁范围。*/
+	flashScope :number;
+	
+	/**帧编号。 */
+	frame: number;
+	
+	/**声效。 */
+	se:$AudioFile;
+}
+/**护甲数据的JSON。 */
+declare class $Armor{
+	/**护甲类型 ID。 */
+	atypeId :number;
+	
+	/**护甲的说明。 */
+	description :string;
+	
+	/**装备类型ID。 */
+	etypeId :number;
+	
+	/**图标的索引。 */
+	iconIndex :number;
+	
+	/**护甲ID。 */
+	id:number;
+	
+	/**护甲名称。 */
+	name: string;
+	
+	/**备注。 */
+	note:string;
+	
+	/**能力值变化量。 (TODO: type?) */
+	params: Array<any>;
+	
+	/**价格。 */
+	price :number;
+	
+	/**由 特性 数据组成的数组。 */
+	traits:Array<$Trait>;
+}
+/**声音数据的JSON类。 */
+declare class $AudioFile{
+	
+	/**文件名。 */
+	name:string;
+	
+	/**声场位置。 */
+	pan:number;
+	
+	/**音调。 */
+	pitch:number;
+	
+	/**音量。 */
+	volume : number;
+}
+/**战斗事件事件页数据的JSON。 */
+declare class $BattleEventPage{
+	
+	/** 触发条件*/
+	conditions:$BattleEventPageConditions;
+	
+	/**由 事件指令 数据组成的数组。 */
+	list :Array<$EventCommand>;
+	
+	/**事件间隔。 */
+	span:number;
+}
+/**战斗事件触发条件数据的JSON。 */
+declare class $BattleEventPageConditions{
+	/**指定角色的HP百分比。 */
+	actorHp :number;
+	
+	/**指定角色的ID。 */
+	actorId :number;
+	
+	/**是否勾选指定角色HP选项。 */
+	actorValid :boolean;
+	
+	/**指定敌人的HP百分比 */
+	enemyHp : number;
+	
+	/**指定敌人的索引。 */
+	enemyIndex :number;
+	
+	/**是否勾选指定敌人HP选项。 */
+	enemyValid :boolean;
+	
+	/**开关ID。 */
+	switchId :number;
+	
+	/**是否勾选指定开关选项 */
+	switchValid:boolean;
+	
+	/**指定回合数的数值A。 */
+	turnA :number;
+	
+	/**指定回合数的数值B。 */
+	turnB :number;
+	
+	/**是否勾选回合结束时选项。 */
+	turnEnding :boolean;
+	
+	/**是否勾选指定回合数选项。 */
+	turnValid :boolean;
+}
+
+/**职业数据的JSON。 */
+declare class $Class{
+	/** 决定经验值曲线的数值数组。 (TODO: type correct?)*/
+	expParams :Array<number>;
+	
+	/**职业ID。 */
+	id:number;
+	
+	/** 由 习得技能 数据组成的数组。*/
+	learnings :Array<$ClassLearning>;
+	
+	/**职业名称。 */
+	name:string;
+	
+	/**备注。 */
+	note: string;
+	
+	/**包含每一等级对应普通能力的二维数组。 (TODO: type?) */
+	params:Array<any>;
+	
+	/**由 特性 数据组成的数组。 */
+	traits :Array<$Trait>;
+}
+
+/**习得技能数据的JSON。 */
+declare class $ClassLearning{
+	/**学习等级。 */
+	level :number;
+	
+	/**备注。 */
+	note:string;
+	
+	/**习得技能ID。 */
+	skillId :number;
+}
+/**公共事件数据的JSON。 */
+declare class $CommonEvent {
+	
+	/**公共事件ID */
+	id:number;
+	
+	/**由 事件指令 数据组成的数组。 */
+	list:Array<$EventCommand>;
+	
+	/**公共事件名称。 */
+	name:string;
+	
+	/**开关ID。 */
+	switchId :number;
+	
+	/**触发条件。 */
+	trigger :number;
+	
+}
+/**伤害数据的JSON。 */
+declare class $Damage {
+	/**是否允许必杀。 */
+	critical :boolean;
+	
+	/**属性编号。 */
+	elementId :number;
+	
+	/**伤害公式。 */
+	formula : string;
+	
+	/**伤害类型。 */
+	type:number;
+	
+	/**伤害离散度。 */
+	variance :number;
+}
+/**使用效果数据的JSON */
+declare class $Effect {
+	/**效果编号。 */
+	code:number;
+	
+	/**使用效果类型（例如属性、状态）的编号，根据不同的使用效果而发生变化。 */
+	dataId :number;
+	
+	/**使用效果参数1。 */
+	value1: number;
+	
+	/**使用效果参数2。 */
+	value2: number;
+}
+/**敌人数据的JSON类。 */
+declare class $Enemy {
+	/** 由 行动模式 数据组成的数组。*/
+	actions :Array<$EnemyAction>;
+	
+	/**敌人战斗图的色调调整。 */
+	battlerHue :number;
+	
+	/**敌人战斗图的文件名。 */
+	battlerName :string;
+	
+	/**由 掉落物品 数据组成的数组 */
+	dropItems :Array<$EnemyDropItem>;
+	
+	/**经验值。 */
+	exp:number;
+	
+	/**金钱。 */
+	gold:number;
+	
+	/**敌人ID。 */
+	id:number;
+	
+	/**敌人名称。 */
+	name:string;
+	
+	/**备注。 */
+	note: string;
+	
+	/**敌人的能力值。 (TODO: type?) */
+	params:Array<any>;
+	
+	/**由 特性 数据组成的数组。 */
+	traits :Array<$Trait>;
+}
+/**敌人行动数据的JSON。 */
+declare class $EnemyAction{
+	
+	/**条件的参数1。 */
+	conditionParam1 :number;
+	
+	/**条件的参数2。 */
+	conditionParam2 :number;
+	
+	/**行动条件。 */
+	conditionType :number;
+	
+	/**优先级。 */
+	rating :number;
+	
+	/**技能ID。 */
+	skillId :number;
+}
+/**掉落物品的类。 */
+declare class $EnemyDropItem{
+	/**掉落物在对应数据库中的编号。 */
+	dataId :number;
+	
+	/**掉率的分母。 */
+	denominator :number;
+	
+	/**掉落物品的类型。 */
+	kind:number;
+}
+/**地图事件数据的类。 */
+declare class $Event {
+	/**事件ID。 */
+	id:number;
+	
+	/**事件名称。 */
+	name: string;
+	
+	/**事件备注。 */
+	note: string;
+	
+	/**由 事件页 数据组成的数组。 */
+	pages: Array<$EventPage>;
+	
+	/**事件的X坐标。 */
+	x:number;
+	
+	/**事件的Y坐标。 */
+	y:number;
+}
+
+/**事件指令数据的JSON。 */
+declare class $EventCommand{
+	
+	/**事件指令代码。 */
+	code:number;
+	
+	/**指令缩排深度。 */
+	indent:number;
+	
+	/**包含事件指令各项参数的数组，不同事件指令有不同内容。(TODO: type?) */
+	parameters:Array<any>;
+}
+/**事件页数据的类。 */
+declare class $EventPage{
+	/**事件的执行条件。 */
+	conditions :Array<$EventPageConditions>;
+	
+	/**是否固定朝向。 */
+	directionFix :boolean;
+	
+	/**事件页的图像。 */
+	image: $EventPageImage;
+	
+	/**由 事件指令 数据组成的数组。 */
+	list:Array<$EventCommand>;
+	
+	/**移动频率。 */
+	moveFrequency :number;
+	
+	/**移动路径。 */
+	moveRoute :$MoveRoute;
+	
+	/**移动速度。 */
+	moveSpeed :number;
+	
+	/**移动类型。 */
+	moveType :number;
+	
+	/**优先级。 */
+	priorityType :number;
+	
+	/**是否开启踏步动画。 */
+	stepAnime :boolean;
+	
+	/**是否开启允许穿透。 */
+	through :boolean;
+	
+	/**触发条件。 */
+	trigger :number;
+	
+	/**是否开启步行动画。 */
+	walkAnime :boolean;
+}
+/**事件出现条件数据的JSON。 */
+declare class $EventPageConditions{
+	/**角色ID。 */
+	actorId :number;
+	
+	/**是否勾选指定角色在队伍中选项。 */
+	actorValid :boolean;
+	
+	/**物品ID。 */
+	itemId :number;
+	
+	/**是否勾选拥有指定物品选项。 */
+	itemValid :boolean;
+	
+	/**独立开关名称。 */
+	selfSwitchCh :string;
+	
+	/**是否勾选独立开关开启选项。 */
+	selfSwitchValid :boolean;
+	
+	/**第一个开关ID */
+	switch1Id :number;
+	
+	/**是否勾选第一个开关打开选项。 */
+	switch1Valid :boolean;
+	
+	/**第二个开关ID。 */
+	switch2Id :number;
+	
+	/**是否勾选第二个开关打开选项。 */
+	switch2Valid :boolean;
+	
+	/**变量ID。 */
+	variableId :number;
+	
+	/**是否勾选变量大于选项。 */
+	variableValid :boolean;
+	
+	/**变量的值。 */
+	variableValue :number;
+}
+/**事件图片数据的JSON。 */
+declare class $EventPageImage{
+	/**行走图的索引。 */
+	characterIndex :number;
+	
+	/**行走图的文件名。 */
+	characterName :string;
+	
+	/**角色的朝向。 */
+	direction :number;
+	
+	/**角色的步伐动作索引。 */
+	pattern:number;
+	
+	/**地图元件 ID 编号。 */
+	tileId :number;
+}
+/**物品数据的JSON。 */
+declare class $Item {
+	/**使用动画的ID。 */
+	animationId :number;
+	
+	/**是否为消耗品。 */
+	consumable :boolean;
+	
+	/**伤害。 */
+	damage :$Damage;
+	
+	/**物品描述。 */
+	description :string;
+	
+	/**由 使用效果 数据组成的数组。 */
+	effects :Array<$Effect>;
+	
+	/**命中类型。 */
+	hitType :number;
+	
+	/**物品图标的索引。 */
+	iconIndex :number;
+	
+	/**物品ID。 */
+	id:number;
+	
+	/**物品类型ID。 */
+	itypeId :number;
+	
+	/**物品名称。 */
+	name:string;
+	
+	/**备注。 */
+	note:string;
+	
+	/**使用场合。(战斗和地图？) */
+	occasion :number;
+	
+	/**物品价格。 */
+	price:number;
+	
+	/**连续次数。 */
+	repeats :number;
+	
+	/**效果范围。 */
+	scope:number;
+	
+	/**速度修正。 */
+	speed:number;
+	
+	/**成功机率。 */
+	successRate :number;
+	
+	/**TP获取量。 */
+	tpGain :number;
+	
+}
+/**地图数据的JSON。 */
+declare class $Map {
+	/**是否自动播放BGM。 */
+	autoplayBgm :boolean;
+	
+	/**是否自动播放BGS。 */
+	autoplayBgs :boolean;
+	
+	/**战斗背景下层图片的文件名。 */
+	battleback1Name :string;
+	
+	/**战斗背景上层图片的文件名。 */
+	battleback2Name :string;
+	
+	/**地图的BGM。 */
+	bgm :$AudioFile;
+	
+	/**地图的BGS。 */
+	bgs :$AudioFile;
+	
+	/**地图数据的三维数组。 (TODO: type?)*/
+	data :Array<any>;
+	
+	/**是否允许跑步。 */
+	disableDashing : boolean;
+	
+	/**地图显示名称。 */
+	displayName :string;
+	
+	/**由 地图遇敌 数据组成的数组。 */
+	encounterList :Array<$MapEncounter>;
+	
+	/**遇敌平均步数。 */
+	encounterStep :number;
+	
+	/**由 事件 数据组成的数组。 */
+	events :Array<$Event>
+	
+	/**地图高度。 */
+	height:number;
+	
+	/**地图备注。 */
+	note:string;
+	
+	/**是否开启远景图横向循环。 */
+	parallaxLoopX :boolean;
+	
+	/**是否开启远景图纵向循环。 */
+	parallaxLoopY :boolean;
+	
+	/**远景图的文件名。 */
+	parallaxName :string;
+	
+	/**远景图是否在编辑器中显示。 */
+	parallaxShow :boolean;
+	
+	/**远景图的水平滚动速度。 */
+	parallaxSx :number;
+	
+	/**远景图的垂直滚动速度。 */
+	parallaxSy :number;
+	
+	/**地图循环方式。 */
+	scrollType :number;
+	
+	/**是否使用战斗背景图像。 */
+	specifyBattleback :boolean;
+	
+	/**地图使用的图块组 ID。 */
+	tilesetId:number;
+	
+	/**地图的宽度 */
+	width:number;
+	
+}
+/**遇敌数据的JSON。 */
+declare class $MapEncounter
+{
+	/**区域 ID 构成的数组。 */
+	regionSet :Array<number>;
+	
+	/**遇敌队伍编号。 */
+	troopId :number;
+	
+	/**权重 */
+	weight:number;
+}
+/**地图信息数据的JSON。 */
+declare class $MapInfo {
+	/**地图树状显示已展开的标记。 */
+	expanded :boolean;
+	
+	/**地图名称。 */
+	name:string;
+	
+	/**地图树状显示的顺序。 */
+	order :number;
+	
+	/**父地图编号。 */
+	parentId :number;
+	
+	/**编辑器内部使用，横向滚动的位置。 */
+	scrollX :number;
+	
+	/**编辑器内部使用，纵向滚动的位置。 */
+	scrollY :number;
+}
+/**移动路线指令数据的JSON。 */
+declare class $MoveCommand {
+	/**移动路线指令代码。 */
+	code:number;
+	
+	/**包含移动路线指令各项参数的数组。 (TODO: type?) */
+	parameters :Array<any>;
+} 
+/**移动路线数据的JSON。 */
+declare class $MoveRoute{
+	/**由 移动路线指令 数据组成的数组。 */
+	list:Array<$MoveCommand>;
+	
+	/**是否循环执行。 */
+	repeat:boolean;
+	
+	/**是否忽略障碍。 */
+	skippable :boolean;
+	
+	/**是否等待至移动结束。 */
+	wait :boolean;
+	
+}
+/**技能数据的JSON。 */
+declare class $Skill {
+	/**动画的ID。 */
+	animationId :number;
+	
+	/**技能伤害。 */
+	damage:$Damage;
+	
+	/**技能描述。 */
+	description :string;
+	
+	/**由 使用效果 数据组成的数组。 */
+	effects :Array<$Effect>;
+	
+	/**命中类型。 */
+	hitType :number;
+	
+	/**图标编号。 */
+	iconIndex :number;
+	
+	/**技能ID。 */
+	id:number;
+	
+	/**使用时显示信息的第一行。 */
+	message1 :string;
+	
+	/**使用时显示信息的第二行。 */
+	message2 :string;
+	
+	/**MP消耗量。 */
+	mpCost :number;
+	
+	/**技能名称。 */
+	name:string;
+	
+	/**备注。 */
+	note:string;
+	
+	/**使用场合。 */
+	occasion :number;
+	
+	/**连续次数。 */
+	repeats :number;
+	
+	/**武器限制1 */
+	requiredWtypeId1 :number;
+	
+	/**武器限制2。 */
+	requiredWtypeId2 :number;
+	
+	/**效果范围。 */
+	scope :number;
+	
+	/**速度修正。 */
+	speed:number;
+	
+	/**技能类型ID。 */
+	stypeId :number;
+	
+	/**成功几率。 */
+	successRate : number;
+	
+	/**TP消耗量。 */
+	tpCost :number;
+	
+	/**TP获取量。 */
+	tpGain :number;
+	
+}
+/**状态数据的JSON。 */
+declare class $State{
+	/**自动解除的时机。 */
+	autoRemovalTiming :number;
+	
+	/**受到伤害时解除的概率。 */
+	chanceByDamageNumber:number;
+	
+	/**图标编号。 */
+	iconIndex :number;
+	
+	/**状态ID。 */
+	id:number;
+	
+	/**状态持续回合数的最大值。 */
+	maxTurns :number;
+	
+	/**状态附加队友时的提示信息。 */
+	message1 :string;
+	
+	/**状态附加敌人时的提示信息。 */
+	message2 :string;
+	
+	/**状态持续时的提示信息。 */
+	message3  :string;
+	
+	/**状态解除时的提示信息。 */
+	message4 :string;
+	
+	/**状态持续回合数的最小值。 */
+	minTurns :number;
+	
+	/**横版战斗时该状态的动作。 */
+	motion:number;
+	
+	/**状态名称。 */
+	name:string;
+	
+	/**备注。 */
+	note:string;
+	
+	/**横版状态时状态显示的图片。 */
+	overlay :number;
+	
+	/**显示优先级 */
+	priority :number;
+	
+	/**战斗结束后是否解除状态。 */
+	removeAtBattleEnd :boolean;
+	
+	/**受到伤害时是否解除状态。 */
+	removeByDamage :boolean;
+	
+	/**获得其他限制性状态时是否解除状态。(抗性?) */
+	removeByRestriction :boolean;
+	
+	/**一定步数后是否解除状态。 */
+	removeByWalking :boolean;
+	
+	/**状态限制。 */
+	restriction :number;
+	
+	/**解除状态所需的步数。 */
+	stepsToRemove :number;
+	
+	/**由 特性 数据组成的数组 */
+	traits :Array<$Trait>;
+}
+/**储存系统数据的JSON。 */
+declare class $System {
+	/**飞艇的设置。 */
+	airship :$SystemVehicle;
+	
+	/**护甲种类的列表。 */
+	armorTypes :Array<string>;
+	
+	/**由 战斗动作 数据组成的数组。 */
+	attackMotions :Array<$SystemAttackMotion>;
+	
+	/**测试战斗模式下，战斗背景的下层图片文件名。 */
+	battleback1Name:string;
+	
+	/**测试战斗模式下，战斗背景的上层图片文件名。 */
+	battleback2Name:string;
+	
+	/**战斗BGM。 */
+	battleBgm:$AudioFile;
+	
+	/**在编辑动画时设置的敌人色相的改变值。 */
+	battlerHue:number;
+	
+	/**在编辑动画时设置的敌人战斗图的文件名。 */
+	battlerName:string;
+	
+	/**小型船的设置。 */
+	boat: $SystemVehicle;
+	
+	/**当前的货币单位。 */
+	currencyUnit:string;
+	
+	/**战败时的ME。 */
+	defeatMe:$AudioFile;
+	
+	/**当前编辑的地图ID。 */
+	editMapId:number;
+	
+	/**属性的列表。 (Elements in database editor) */
+	elements:Array<string>;
+	
+	/**装备类型的列表。 */
+	equipTypes:Array<string>;
+	
+	/**Game Over 时的 ME。 */
+	gameoverMe:$AudioFile;
+	
+	/**游戏的标题。 */
+	gameTitle:string;
+	
+	/**描述本地环境的字符串，例如 "ja_JP" 或者 "en_US"。 */
+	locale:string;
+	
+	/**魔法技能的技能类型ID组成的数组。 */
+	magicSkills:Array<number>;
+	
+	/**菜单的选项。(编辑器中的6个checkbox) */
+	menuCommands:Array<boolean>;
+	
+	/**战斗中是否显示TP的选项。 */
+	optDisplayTp:boolean;
+	
+	/**是否描绘标题文字的选项。 */
+	optDrawTitle:boolean;
+	
+	/**未参战人员是否获得EXP的选项。 */
+	optExtraExp:boolean;
+	
+	/**地形伤害是否导致无法战斗的选项。 */
+	optFloorDeath:boolean;
+	
+	/**是否显示跟随成员的选项。 */
+	optFollowers:boolean;
+	
+	/**是否使用横版战斗模式的选项。 */
+	optSideView:boolean;
+	
+	/**慢性伤害是否导致死亡的选项。 */
+	optSlipDeath:boolean;
+	
+	/**开始时行走图是否透明的选项。 */
+	optTransparent:boolean;
+	
+	/**初始队伍角色ID的数组。 */
+	partyMembers:Array<number>;
+	
+	/**大型船的设置。 */
+	ship:$SystemVehicle;
+	
+	/** 技能类型的列表。*/
+	skillTypes:Array<string>;
+	
+	/**由音效文件的 声音数据 组成的数组。 */
+	sounds:Array<$AudioFile>;
+	
+	/**初始地图的ID。 */
+	startMapId:number;
+	
+	/**初始地图的X坐标。 */
+	startX:number;
+	
+	/**初始地图的Y坐标。 */
+	startY:number;
+	
+	/**开关名称的列表。 */
+	switches:Array<string>;
+	
+	/** 游戏用语。*/
+	terms:$SystemTerms;
+	
+	/**由 测试战斗者 数据组成的数组。 */
+	testBattlers:Array<$SystemTestBattler>;
+	
+	/**战斗测试的敌群ID。 */
+	testTroopId: number;
+	
+	/**标题画面的下层图片文件名。 */
+	title1Name:string;
+	
+	/**标题画面的上层图片文件名。 */
+	title2Name:string;
+	
+	/**标题画面的BGM。 */
+	titleBgm:$AudioFile;
+	
+	/**变量名称的列表。 */
+	variables:Array<string>;
+	
+	/**检查游戏是否发生更新的随机数。 */
+	versionId:number;
+	
+	/**胜利时的ME。 */
+	victoryMe:$AudioFile;
+	
+	/**武器类型的列表。 */
+	weaponTypes:Array<string>;
+	
+	/**窗口的颜色。 */
+	windowTone:Array<number>;
+}
+/**储存攻击数据的JSON。 */
+declare class $SystemAttackMotion{
+	/**动作的类型。 */
+	type:number;
+	
+	/**动作图片的ID。 */
+	weaponImageId:number;
+}
+/**储存用语数据的JSON。 */
+declare class $SystemTerms{
+	/**基本状态的名称。 */
+	basic:Array<string>;
+	
+	/**指令的名称。 */
+	commands:Array<string>;
+	
+	/**信息文字。 */
+	messages:Object;
+	
+	/**属性的名称。 */
+	params:Array<string>;
+}
+/**储存战斗测试时角色数据的JSON。 */
+declare class $SystemTestBattler{
+	/**角色的ID */
+	actorId:number;
+	
+	/**装备列表。 */
+	equips:Array<number>;
+	
+	/**角色的等级。 */
+	level:number;
+}
+/**储存交通工具数据的JSON。 */
+declare class $SystemVehicle{
+	/**交通工具的BGM。 */
+	bgm:$AudioFile;
+	
+	/**行走图的编号。 */
+	characterIndex:number;
+	
+	/**行走图的文件名。 */
+	characterName:string;
+	
+	/**起始位置的地图ID。 */
+	startMapId:number;
+	
+	/**起始位置的地图X坐标。 */
+	startX:number;
+	
+	/**起始位置的地图Y坐标。 */
+	startY:number;
+	
+}
+/**储存图块组数据的JSON。 */
+declare class $Tileset{
+	/**图块组标志。 */
+	flags:Array<number>;
+	
+	/**图块组ID。 */
+	id:number;
+	
+	/**图块组模式。 */
+	mode:number;
+	
+	/**图块组名称。 */
+	name:string;
+	
+	/**图块组备注。 */
+	note:string;
+	
+	/** 图块图片的文件名。*/
+	tilesetNames:Array<string>;
+	
+}
+
+/**特性数据的JSON。 */
+declare class $Trait{
+	
+	/**特性代码。 */
+	code :number;
+	
+	/**特性类型对应的数据（属性、状态等）ID。 */
+	dataId :number;
+	
+	/**特性类型对应的设置值。 */
+	value: number;
+}
+/**敌方队伍的 JSON 数据结构。 */
+declare class $Troop{
+	/**敌方队伍 ID。 */
+	id:number;
+	
+	/**成员数据的数组。 */
+	members:Array<$TroopMember>;
+	
+	/**名字。 */
+	name:string;
+	
+	/**战斗事件（页）数据的数组. */
+	pages:Array<$BattleEventPage>;
+}
+
+/**敌方队员的JSON 数据结构 */
+declare class $TroopMember{
+	/**敌方 ID 。 */
+	enemyId:number;
+	
+	/**"中途出现"选项。 */
+	hidden:boolean;
+	
+	/**X 坐标。 */
+	x:number;
+	
+	/**Y 坐标。 */
+	y:number;
+	
+}
+/**武器的JSON 数据结构。 */
+declare class $Weapon{
+	/**动画 ID。 */
+	animationId:number;
+	
+	/**描述文本。 */
+	description:string;
+	
+	/**装备类型 ID。 */
+	etypeId:number;
+	
+	/**图标图像的索引。 */
+	iconIndex:number;
+	
+	/**武器id */
+	id:number;
+	
+	/**名字。 */
+	name:string;
+	
+	/**注释。 */
+	note:string;
+	
+	/** 参数的变化。*/
+	params:Array<number>;
+	
+	/**价格。 */
+	price:number;
+	
+	/**特征数据的数组。 */
+	traits:Array<$Trait>;
+	
+	/**武器类型的ID。 */
+	wtypeId:number;
+}
+
+declare class Game_Actors{
+	
+}
+
+declare class Game_Map{
+	
+}
+declare class Game_Message{
+	
+}
+declare class Game_Party{
+	
+}
+declare class Game_Player{}
+declare class Game_Screen{}
+declare class Game_SelfSwitches{}
+declare class Game_Switches{}
+declare class Game_System{}
+declare class Game_Temp{}
+declare class Game_Timer{}
+declare class Game_Troop{}
+declare class Game_Variables{}
+declare var $dataActors       :Array<$Actor>;
+declare var $dataClasses      :Array<$Class>;
+declare var $dataSkills       :Array<$Skill>;
+declare var $dataItems        :Array<$Item>;
+declare var $dataWeapons      :Array<$Weapon>;
+declare var $dataArmors       :Array<$Armor>;
+declare var $dataEnemies      :Array<$Enemy>;
+declare var $dataTroops       :Array<$Troop>;
+declare var $dataStates       :Array<$State>;
+declare var $dataAnimations   :Array<$Animation>;
+declare var $dataTilesets     :Array<$Tileset>;
+declare var $dataCommonEvents :Array<$CommonEvent>;
+declare var $dataSystem       :$System; // TODO: correct?
+declare var $dataMapInfos     :Array<$MapInfo>;
+declare var $dataMap          :$Map;
+declare var $gameTemp         :Game_Temp;
+declare var $gameSystem       :Game_System;
+declare var $gameScreen       :Game_Screen;
+declare var $gameTimer        :Game_Timer;
+declare var $gameMessage      :Game_Message;
+declare var $gameSwitches     :Game_Switches;
+declare var $gameVariables    :Game_Variables;
+declare var $gameSelfSwitches :Game_SelfSwitches;
+declare var $gameActors       :Game_Actors;
+declare var $gameParty        :Game_Party;
+declare var $gameTroop        :Game_Troop;
+declare var $gameMap          :Game_Map;
+declare var $gamePlayer       :Game_Player;
+//declare var $testEven;

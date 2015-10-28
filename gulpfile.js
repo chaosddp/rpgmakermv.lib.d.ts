@@ -9,7 +9,12 @@ gulp.task("default", function(){
 		.pipe(gulp.dest("output"));
 		
 	// here to merge files to a single one
-	gulp.src(["src/ref.txt","src/*.d.ts"])
+	gulp.src(["src/ref.txt"
+			,"src/from doc/*.d.ts"
+			,"src/json/*.d.ts"
+			, "src/from source/objects/*.d.ts"
+			, "src/from source/globals.d.ts"
+			, "src/from source/managers/*.d.ts"])
 		.pipe(concat("rpgmakermv.lib.d.ts"))
 		.pipe(gulp.dest("output"));
 });
