@@ -237,7 +237,7 @@ declare class Bitmap{
 	paintOpacity :number;
 	
 	/**[只读] 位图对象的矩形区域 */
-	rect :PIXI.Rectangle;
+	rect :Rectangle;
 	
 	/** 是否应用平滑缩放*/
 	smooth :boolean;
