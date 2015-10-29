@@ -77,7 +77,7 @@ declare class Game_System{
 	windowTone():Array<number>;
 	
 	/**设置口的颜色 （同$System） */
-	setWindowTone(Array<number>);
+	setWindowTone(color:Array<number>);
 	
 	/**获取战斗背景音乐 */
 	battleBgm():$AudioFile;

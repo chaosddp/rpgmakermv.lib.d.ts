@@ -2734,8 +2734,75 @@ declare class Game_Actors{
 declare class Game_Map{
 	
 }
+/**The game object class for the state of the message window that displays text
+or selections, etc. */
 declare class Game_Message{
+	initialize();
 	
+	/**清除，包括文本，选项，背景等 */
+	clear();
+	
+	/** 选项数组 TODO:type? */
+	choices():Array<any>;
+	
+	/**脸图的文件名。  */
+	faceName():string;
+	
+	/**脸图的索引。 */
+	faceIndex():number;
+	
+	background():any;
+	
+	positionType():any;
+	
+	choiceDefaultType():any;
+	
+	choiceCancelType():any;
+	
+	choiceBackground():any;
+	
+	choicePositionType():any;
+	
+	numInputVariableId():number;
+	
+	numInputMaxDigits():number;
+	
+	itemChoiceVariableId():number;
+	
+	itemChoiceItypeId():number;
+	
+	scrollMode():number;
+	
+	scrollSpeed():number;
+	
+	scrollNoFast():any;
+	
+	/**添加文字 */
+	add(text:string);
+	
+	setFaceImage(faceName:string, faceIndex:number);
+	
+	setBackground(background:string);
+	
+	setPositionType(positionType:any);
+	
+	setChoices(choise:Array<any>, defaultType:any, cancelType:any);
+	
+	setChoiceBackground(background:string);
+	
+	setChoicePositionType(positionType:any);
+	
+	setNumberInput(variableId:number, maxDigits:number);
+	
+	setItemChoice(variableId:number, itemType:number);
+	
+	setScroll(speed:number, noFast:any);
+	
+	setChoiceCallback(callback:Function);
+	
+	onChoice(n:number);
+	
+	hasText();boolean;
 }
 declare class Game_Party{
 	
@@ -2744,9 +2811,198 @@ declare class Game_Player{}
 declare class Game_Screen{}
 declare class Game_SelfSwitches{}
 declare class Game_Switches{}
-declare class Game_System{}
-declare class Game_Temp{}
-declare class Game_Timer{}
+/**系统数据 */
+declare class Game_System{
+	/**初始化 */
+	initialize();
+	
+	/** 是否是日语 */
+	isJapanese():boolean;
+	
+	/**是否是中文*/
+	isChinese():boolean;
+	
+	/**是否是韩语 */
+	isKorean():boolean;
+	
+	/**是否是中日韩统一表意文字 （TODO:correct?） */
+	isCJK():boolean;
+	
+	/**是否是俄语 */
+	isRussian():boolean;
+	
+	/**是否是横版战斗模式 */
+	isSideView():boolean;
+	
+	/**是否可以存档 */
+	isSaveEnabled():boolean;
+	
+	/** 禁用存档 */
+	disableSave();
+	
+	/**启动存档 */
+	enableSave();
+	
+	/** 菜单是否可用 （TODO：哪个菜单？） */
+	isMenuEnabled():boolean;
+	
+	/**禁用菜单 */
+	disableMenu();
+	
+	/**启用菜单 */
+	enableMenu();
+	
+	/**是否开启遇敌 */
+	isEncounterEnabled():boolean;
+	
+	/**禁用遇敌 */
+	disableEncounter();
+	
+	/**启用遇敌 */
+	enableEncounter();
+	
+	/** TODO：System 设置里可以设置的一个菜单项 */
+	isFormationEnabled();
+	
+	disableFormation();
+	
+	enableFormation();
+	
+	/**战斗次数？ （TODO） */
+	battleCount():number;
+	
+	/**胜利次数？ （TODO） */
+	winCount():number;
+	
+	/**逃跑次数 */
+	escapeCount():number;
+	
+	/**存档次数 */
+	saveCount():number;
+	
+	/**版本id？(TODO) */
+	versionId():number;
+	
+	/**获取窗口的颜色
+	 * 
+	 * @return {Array<number>} 即$System.windowTone
+	*/
+	windowTone():Array<number>;
+	
+	/**设置口的颜色 （同$System） */
+	setWindowTone(color:Array<number>);
+	
+	/**获取战斗背景音乐 */
+	battleBgm():$AudioFile;
+	
+	/**获取设置战斗背景音乐 */
+	setBattleBgm(bgm:$AudioFile);
+	
+	/**胜利时的ME */
+	victoryMe():$AudioFile;
+	
+	/**设置胜利时的ME */
+	setVictoryMe(value:$AudioFile);
+	
+	/**得到战败时的ME */
+	defeatMe():$AudioFile;
+	
+	/**设置战败时的ME */
+	setDefeatMe(value:$AudioFile);
+	
+	/**战斗开始，结果是战斗次数加1 */
+	onBattleStart();
+	
+	/**战斗胜利，结果是胜利次数加1 */
+	onBattleWin();
+	
+	/**逃跑，逃跑次数加1 */
+	onBattleEscape();
+	
+	/**存档前调用的方法，存档次数加1，保存当前帧和bgm等 */
+	onBeforeSave();
+	
+	/**存档后调用的方法，恢复保存的帧，恢复bgm等 */
+	onAfterLoad();
+	
+	/**游戏时间 （单位应该是秒）*/
+	playtime():number;
+	
+	/**游戏时间的文本，形如 小时：分钟：秒 */
+	playtimeText();
+	
+	/**保存bgm */
+	saveBgm();
+	
+	/**重播bgm（调用saveBgm保存的bgm） */
+	replayBgm();
+	
+	/** */
+	saveWalkingBgm();
+	
+	replayWalkingBgm();
+}
+/**临时数据，不会被包含在存档中 */
+declare class Game_Temp{
+	
+	/**初始化 */
+	initialize();
+	
+	/**测试中 */
+	isPlaytest();
+	
+	/**保留指定事件 （这句会更新内部的_commonEventId成员） */
+	reserveCommonEvent(commonEventId:number);
+	
+	/**清空当前保留的事件， 即 id=0*/
+	clearCommonEvent();
+	
+	/**
+	 * 当前是否有保留的事件
+	 * 
+	 * @return {boolean}
+	 */
+	isCommonEventReserved():boolean;
+	
+	/**
+	 * 取得保留的事件 
+	 * 
+	 * @return {$CommonEvent} 取得保留的事件（通过id取得）
+	*/
+	reservedCommonEvent():$CommonEvent;
+	
+	/** TODO: ? */
+	setDestination(x:number, y:number);
+	
+	/** TODO: ? */
+	clearDestination(x:number, y:number);
+	
+	/** TODO: ? */
+	isDestinationValid():boolean;
+	
+	/** TODO: ? */
+	destinationX():number;
+	
+	/** TODO: ? */
+	destinationY():number;
+	
+}
+/**定时器？ */
+declare class Game_Timer{
+	initialize();
+	
+	update(sceneActive:any);
+	
+	start();
+	
+	stop();
+	
+	isWorking():boolean;
+	
+	seconds():number;
+	
+	onExpire();
+}
 declare class Game_Troop{}
 declare class Game_Variables{}
 declare var $dataActors       :Array<$Actor>;
