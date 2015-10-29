@@ -66,5 +66,21 @@ declare class Game_Message{
 	
 	onChoice(n:number);
 	
-	hasText();boolean;
+	/**是否有文字（数组） */
+	hasText():boolean;
+	
+	/**是否有选择 */
+	isChoice():boolean;
+	
+	isNumberInput():boolean;
+	
+	isItemChoice():boolean;
+	
+	isBusy():boolean;
+	
+	/**（最后一个文本追加了\f？） */
+	newPage();
+	
+	/** 所有文本（即将文本数组使用\n拼接） */
+	allText():string;
 }
