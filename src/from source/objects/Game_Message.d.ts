@@ -83,4 +83,6 @@ declare class Game_Message{
 	
 	/** 所有文本（即将文本数组使用\n拼接） */
 	allText():string;
+	
+
 }

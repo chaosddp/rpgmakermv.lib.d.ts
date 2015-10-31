@@ -5,7 +5,7 @@ declare class Game_Action{
 	
 	clear();
 	
-	setSubject(subject:Game_BattlerBase);
+	setSubject(subject:Game_Actor);
 	
 	
 }
