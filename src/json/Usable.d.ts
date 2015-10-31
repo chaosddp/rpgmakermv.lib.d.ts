@@ -1,6 +1,6 @@
 
 /** 可使用，技能和道具的基类 */
-declare interface Usable{
+declare class Usable{
 	/**动画的ID。 */
 	animationId :number;
 

@@ -1,5 +1,5 @@
 /** 护甲和武器的基类 */
-declare interface Equipment{
+declare class Equipment{
 	/**说明。 */
 	description :string;
 	
