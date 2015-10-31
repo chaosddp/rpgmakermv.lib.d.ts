@@ -1634,6 +1634,87 @@ declare class WindowLayer
 	 /**窗口的y坐标。 */
 	 y:number;
 }
+/** 护甲和武器的基类 */
+declare class Equipment{
+	/**说明。 */
+	description :string;
+	
+	/**装备类型ID。 */
+	etypeId :number;
+	
+	/**图标的索引。 */
+	iconIndex :number;
+	
+	/**ID。 */
+	id:number;
+	
+	/**名称。 */
+	name: string;
+	
+	/**备注。 */
+	note:string;
+	
+	/**能力值变化量。 (TODO: type?) */
+	params: Array<number>;
+	
+	/**价格。 */
+	price :number;
+	
+	/**由 特性 数据组成的数组。 */
+	traits:Array<$Trait>;
+}
+
+/** 可使用，技能和道具的基类 */
+declare class Usable{
+	/**动画的ID。 */
+	animationId :number;
+
+	/**伤害。 */
+	damage :$Damage;
+
+	/**描述。 */
+	description :string;
+
+	/**由 使用效果 数据组成的数组。 */
+	effects :Array<$Effect>;
+
+	/**命中类型。 */
+	hitType :number;
+
+	
+	/**图标编号。 */
+	iconIndex :number;
+
+	/**ID。 */
+	id:number;
+
+	/**名称。 */
+	name:string;
+
+	/**备注。 */
+	note:string;
+
+	/**使用场合。(战斗和地图？) */
+	occasion :number;
+
+	/**连续次数。 */
+	repeats :number;
+
+	
+	/**效果范围。 */
+	scope :number;
+
+	/**速度修正。 */
+	speed:number;
+
+
+	
+	/**成功几率。 */
+	successRate : number;
+
+	/**TP获取量。 */
+	tpGain :number;
+}
 /**角色数据的JSON。 */
 declare class $Actor{
 	/** 横版战斗的战斗图文件名。*/
@@ -1731,36 +1812,9 @@ declare class AnimationTiming{
 	se:$AudioFile;
 }
 /**护甲数据的JSON。 */
-declare class $Armor{
+declare class $Armor extends Equipment{
 	/**护甲类型 ID。 */
 	atypeId :number;
-	
-	/**护甲的说明。 */
-	description :string;
-	
-	/**装备类型ID。 */
-	etypeId :number;
-	
-	/**图标的索引。 */
-	iconIndex :number;
-	
-	/**护甲ID。 */
-	id:number;
-	
-	/**护甲名称。 */
-	name: string;
-	
-	/**备注。 */
-	note:string;
-	
-	/**能力值变化量。 (TODO: type?) */
-	params: Array<any>;
-	
-	/**价格。 */
-	price :number;
-	
-	/**由 特性 数据组成的数组。 */
-	traits:Array<$Trait>;
 }
 /**声音数据的JSON类。 */
 declare class $AudioFile{
@@ -2110,61 +2164,16 @@ declare class $EventPageImage{
 	tileId :number;
 }
 /**物品数据的JSON。 */
-declare class $Item {
-	/**使用动画的ID。 */
-	animationId :number;
-	
+declare class $Item extends Usable {
+
 	/**是否为消耗品。 */
 	consumable :boolean;
-	
-	/**伤害。 */
-	damage :$Damage;
-	
-	/**物品描述。 */
-	description :string;
-	
-	/**由 使用效果 数据组成的数组。 */
-	effects :Array<$Effect>;
-	
-	/**命中类型。 */
-	hitType :number;
-	
-	/**物品图标的索引。 */
-	iconIndex :number;
-	
-	/**物品ID。 */
-	id:number;
 	
 	/**物品类型ID。 */
 	itypeId :number;
 	
-	/**物品名称。 */
-	name:string;
-	
-	/**备注。 */
-	note:string;
-	
-	/**使用场合。(战斗和地图？) */
-	occasion :number;
-	
 	/**物品价格。 */
 	price:number;
-	
-	/**连续次数。 */
-	repeats :number;
-	
-	/**效果范围。 */
-	scope:number;
-	
-	/**速度修正。 */
-	speed:number;
-	
-	/**成功机率。 */
-	successRate :number;
-	
-	/**TP获取量。 */
-	tpGain :number;
-	
 }
 /**地图数据的JSON。 */
 declare class $Map {
@@ -2297,27 +2306,7 @@ declare class $MoveRoute{
 	
 }
 /**技能数据的JSON。 */
-declare class $Skill {
-	/**动画的ID。 */
-	animationId :number;
-	
-	/**技能伤害。 */
-	damage:$Damage;
-	
-	/**技能描述。 */
-	description :string;
-	
-	/**由 使用效果 数据组成的数组。 */
-	effects :Array<$Effect>;
-	
-	/**命中类型。 */
-	hitType :number;
-	
-	/**图标编号。 */
-	iconIndex :number;
-	
-	/**技能ID。 */
-	id:number;
+declare class $Skill extends Usable{
 	
 	/**使用时显示信息的第一行。 */
 	message1 :string;
@@ -2328,42 +2317,17 @@ declare class $Skill {
 	/**MP消耗量。 */
 	mpCost :number;
 	
-	/**技能名称。 */
-	name:string;
-	
-	/**备注。 */
-	note:string;
-	
-	/**使用场合。 */
-	occasion :number;
-	
-	/**连续次数。 */
-	repeats :number;
-	
 	/**武器限制1 */
 	requiredWtypeId1 :number;
 	
 	/**武器限制2。 */
 	requiredWtypeId2 :number;
 	
-	/**效果范围。 */
-	scope :number;
-	
-	/**速度修正。 */
-	speed:number;
-	
 	/**技能类型ID。 */
 	stypeId :number;
 	
-	/**成功几率。 */
-	successRate : number;
-	
 	/**TP消耗量。 */
 	tpCost :number;
-	
-	/**TP获取量。 */
-	tpGain :number;
-	
 }
 /**状态数据的JSON。 */
 declare class $State{
@@ -2692,36 +2656,9 @@ declare class $TroopMember{
 	
 }
 /**武器的JSON 数据结构。 */
-declare class $Weapon{
+declare class $Weapon extends Equipment{
 	/**动画 ID。 */
 	animationId:number;
-	
-	/**描述文本。 */
-	description:string;
-	
-	/**装备类型 ID。 */
-	etypeId:number;
-	
-	/**图标图像的索引。 */
-	iconIndex:number;
-	
-	/**武器id */
-	id:number;
-	
-	/**名字。 */
-	name:string;
-	
-	/**注释。 */
-	note:string;
-	
-	/** 参数的变化。*/
-	params:Array<number>;
-	
-	/**价格。 */
-	price:number;
-	
-	/**特征数据的数组。 */
-	traits:Array<$Trait>;
 	
 	/**武器类型的ID。 */
 	wtypeId:number;
@@ -2735,6 +2672,192 @@ declare class Game_Action{
 	
 	setSubject(subject:Game_BattlerBase);
 	
+	subject():$TroopMember;
+	
+	/** Game_Troop/Game_Party */
+	friendsUnit():any;
+	
+	/** Game_Troop/Game_Party */
+	opponentsUnit():any;
+	
+
+	setEnemyAction(action:$EnemyAction);
+	
+	setAttack();
+	
+	setGuard();
+	
+	setSkill(skillId:number);
+	
+	setItem(itemId:number);
+	
+	setItemObject(object:Usable);
+	
+	setTarget(targetIndex:number);
+	
+	/**item of this action, may be skill or an item */
+	item():Usable;
+	
+	isSkill():boolean;
+	
+	isItem():boolean;
+	
+	checkItemScope(list:Array<number>):boolean;
+	
+	isForOpponent():boolean;
+	
+	isForFriend():boolean;
+	
+	isForDeadFriend():boolean;
+	
+	isForUser():boolean;
+	
+	isForOne():boolean;
+	
+	isForRandom():boolean;
+	
+	isForAll():boolean;
+	
+	needsSelection():boolean;
+	
+	numTargets():number;
+	
+	checkDamageType():boolean;
+	
+	isHpEffect():boolean;
+	
+	isMpEffect():boolean;
+	
+	isDamage():boolean;
+	
+	isRecover():boolean;
+	
+	isDrain():boolean;
+	
+	isHpRecover():boolean;
+	
+	isMpRecover():boolean;
+	
+	isCertainHit():boolean;
+	
+	isPhysical():boolean;
+	
+	isMagical():boolean;
+	
+	isAttack():boolean;
+	
+	isGuard():boolean;
+	
+	isMagicSkill():boolean;
+	
+	decideRandomTarget();
+	
+	setConfusion();
+	
+	prepare();
+	
+	isValid():boolean;
+	
+	speed():number;
+	
+	makeTargets(targets: Array<Game_BattlerBase>):Array<Game_BattlerBase>;
+	
+	confusionTarget():Game_BattlerBase;
+	
+	targetsForOpponents():Array<Game_BattlerBase>;
+	
+	targetsForFriends():Array<Game_BattlerBase>;
+	
+	evaluate():number;
+	
+	itemTargetCandidates():Array<Game_BattlerBase>;
+	
+	evaluateWithTarget(target:Game_BattlerBase):number;
+	
+	testApply(target:Game_BattlerBase):boolean;
+	
+	hasItemAnyValidEffects(target:Game_BattlerBase):boolean;
+	
+	testItemEffect(target:Game_BattlerBase, effect:$Effect):boolean;
+	
+	itemCnt(target:Game_BattlerBase):number;
+	
+	itemMrf(target:Game_BattlerBase):number;
+	
+	itemHit(target:Game_BattlerBase):number;
+	
+	itemEva(target:Game_BattlerBase):number;
+	
+	itemCri(target:Game_BattlerBase):number;
+	
+	apply(target:Game_BattlerBase):number;
+	
+	makeDamageValue(target:Game_BattlerBase, critical:boolean):number;
+	
+	evalDamageFormula(target:Game_BattlerBase):number;
+	
+	calcElementRate(target:Game_BattlerBase):number;
+	
+	elementsMaxRate(target:Game_BattlerBase):number;
+	
+	/** 3 times */
+	applyCritical(damage:number):number;
+	
+	applyVariance(damage:number, variance:number):number;
+	
+	applyGuard(damage:number, target:Game_BattlerBase):number;
+	
+	/**this method will check damage type to call executeHpDamage or executeMpDamage */
+	executeDamage(target:Game_BattlerBase, value:number);
+	
+	executeHpDamage(target:Game_BattlerBase, value:number);
+	
+	executeMpDamage(target:Game_BattlerBase, value:number);
+	
+	/** */
+	gainDrainedHp(value:number);
+	
+	gainDrainedMp(value:number);
+	
+	applyItemEffect(target:Game_BattlerBase, effect:$Effect); 
+	
+	itemEffectRecoverHp(target:Game_BattlerBase, effect:$Effect);
+	
+	itemEffectRecoverMp(target:Game_BattlerBase, effect:$Effect);
+	
+	itemEffectGainTp(target:Game_BattlerBase, effect:$Effect);
+	
+	itemEffectAddState(target:Game_BattlerBase, effect:$Effect);
+	
+	itemEffectAddAttackState(target:Game_BattlerBase, effect:$Effect);
+	
+	itemEffectAddNormalState(target:Game_BattlerBase, effect:$Effect);
+	
+	itemEffectRemoveState(target:Game_BattlerBase, effect:$Effect);
+	
+	itemEffectAddBuff(target:Game_BattlerBase, effect:$Effect);
+	
+	itemEffectAddDebuff(target:Game_BattlerBase, effect:$Effect);
+	
+	itemEffectRemoveBuff(target:Game_BattlerBase, effect:$Effect);
+	
+	itemEffectRemoveDebuff(target:Game_BattlerBase, effect:$Effect);
+	
+	itemEffectSpecial(target:Game_BattlerBase, effect:$Effect);
+	
+	itemEffectGrow(target:Game_BattlerBase, effect:$Effect);
+	
+	itemEffectLearnSkill(target:Game_BattlerBase, effect:$Effect);
+	
+	itemEffectCommonEvent(target:Game_BattlerBase, effect:$Effect);
+	
+	makeSuccess(target:Game_BattlerBase);
+	
+	applyItemUserEffect(target:Game_BattlerBase);
+	
+	lukEffectRate(target:Game_BattlerBase):number;
+	
+	applyGlobal();
 	
 }
 
@@ -2758,9 +2881,524 @@ var HITTYPE_PHYSICAL       :number;
 var HITTYPE_MAGICAL        :number;
 }
 
-declare class Game_Actors{
+/** The game object class for a result of a battle action. For convinience, all
+ member variables in this class are public. */
+declare class Game_ActionResult{
 	
+	used:boolean;
+    missed :boolean;
+    evaded  :boolean;
+    physical :boolean;
+    drain :boolean;
+    critical :boolean;
+    success :boolean;
+    hpAffected :boolean;
+    hpDamage :number;
+    mpDamage :number;
+    tpDamage :number;
+    addedStates :Array<number>;
+    removedStates :Array<number>;
+    addedBuffs :Array<number>;
+    addedDebuffs :Array<number>;
+    removedBuffs :Array<number>;
+	
+	initialize();
+	
+	clear();
+	
+	addedStateObjects():Array<$State>;
+	
+	removedStateObjects():Array<$State>;
+    
+    isStatusAffected():boolean;
+    
+    isHit():boolean;
+    
+    isStateAdded(stateId:number):boolean;
+    
+    pushAddedState(stateId:number);
+    
+    isStateRemoved(stateId:number):boolean;
+    
+    pushRemovedState(state:number);
+    
+    isBuffAdded(paramId:number):boolean;
+    
+    pushAddedBuff(paramId:number);
+    
+    isDebuffAdded(paramId:number):boolean;
+    
+    pushAddedDebuff(paramId:number);
+    
+    isBuffRemoved(paramId:number):boolean;
+    
+    pushRemovedBuff(paramId:number);
 }
+/**The game object class for an actor. */
+declare class Game_Actor extends Game_Battler{
+	level:number;
+	
+	setup(actorId:number);
+	
+	actorId():number;
+	
+	actor():$Actor;
+	
+	name():string;
+	
+	setName(name:string);
+	
+	nickname():string;
+	
+	setNickname(nickName:string);
+	
+	profile():string;
+	
+	setProfile(profile:string);
+	
+	characterName():string;
+	
+	characterIndex():number;
+	
+	faceName():string;
+	
+	faceIndex():number;
+	
+	battlerName():string;
+	
+	initImages();
+	
+	expForLevel():number;
+	
+	initExp();
+	
+	currentExp():number;
+	
+	currentLevelExp():number;
+	
+	nextLevelExp():number;
+	
+	nextRequiredExp():number;
+	
+	maxLevel():number;
+	
+	isMaxLevel():boolean;
+	
+	initSkills();
+	
+	initEquips();
+	
+	equipSlots();
+	
+	/** all equipments include weapon and armor */
+	equips():Array<Equipment>;
+	
+	weapons():Array<$Weapon>;
+	
+	armors():Array<$Armor>;
+	
+	hasWeapon(weapon:$Weapon):boolean;
+	
+	hasArmor(armor:$Armor):boolean;
+	
+	/** if we can change the equipment in specified slot  */
+	isEquipChangeOk(slotId:number):boolean;
+	
+	changeEquip(soltId:number, item:Equipment);
+	
+	forceChangeEquip(slotId:number, item:Equipment);
+	
+	/** the items can be weapon, armor, and item */
+	tradeItemWithParty(newItem:any, oldItem:any);
+	
+	changeEquipById(etypeId:number, itemId:number);
+	
+	isEquipped(item:Equipment);
+	
+	discardEquip(item:Equipment);
+	
+	releaseUnequippableItems(forcing:boolean);
+	
+	clearEquipments();
+	
+	/** change all slots to best equipments */
+	optimizeEquipments();
+	
+	bestEquipItem(slotId:number):Equipment;
+	
+	/**计算能力值，用于计算是否是最佳装备 */
+	calcEquipItemPerformance(item:Equipment):number;
+	
+	/**技能针对当前装备的武器是否合适（可用） */
+	isSkillWtypeOk(skill:$Skill):boolean;
+	
+	/**是否装备指定类型的武器 */
+	isWtypeEquipped(wtypeId:number);
+	
+	/**always be true */
+	isActor():boolean;
+	
+	/** same with $gameParty */
+	friendsUnit():Game_Party;
+	
+	/** same with $gameTroop */
+	opponentsUnit():Game_Troop;
+	
+	/**index in the party */
+	index():number;
+	
+	isBattleMember():boolean;
+	
+	/** always be true */
+	isFormationChangeOk():boolean;
+	
+	currentClass():$Class;
+	
+	isClass(gameClass:$Class):boolean;
+	
+	skills():Array<$Skill>;
+	
+	usableSkills():Array<$Skill>;
+	
+	hasNoWeapons():boolean;
+	
+	/** 徒手伤害类型？ */
+	bareHandsElementId():number;
+	
+	
+	paramBase(paramId:number):any;
+	
+	attackAnimationId1():number;
+	
+	attackAnimationId2():number;
+	
+	bareHandsAnimationId():number;
+	
+	/**设置经验值
+	 * @param {number} exp 需要的经验值
+	 * @param {boolean} show 提升经验之后，如果升级是否显示
+	 */
+	changeExp(exp:number, show:boolean);
+	
+	levelUp();
+	
+	levelDown();
+	
+	/**当前等级能学习的新技能 */
+	findNewSkills(lastSkills:Array<$Skill>):Array<$Skill>;
+	
+	/**显示升级信息（包括新技能） */
+	displayLevelUp(newSkills:Array<$Skill>);
+	
+	/**增加经验 */
+	gainExp(exp:number);
+	
+	finalExpRate();
+	
+	/**1/0 */
+	benchMembersExpRate():number;
+	
+	shouldDisplayLevelUp():boolean;
+	
+	changeLevel(level:number, show:boolean);
+	
+	learnSkill(skillId:number);
+	
+	forgetSkill(skillId:number);
+	
+	isLearnedSkill(skillId:number);
+	
+	changeClass(classId:number, keepExp:boolean);
+	
+	setCharacterImage(characterName: string, characterIndex:number);
+	
+	setFaceImage(faceName:string, faceIndex:number);
+	
+	setBattlerImage(battlerName:string);
+	
+	isSpriteVisible():boolean;
+	
+	performAttack():boolean;
+	
+	performVictory();
+	
+	performEscape();
+	
+	makeActionList();
+	
+	makeAutoBattleActions();
+	
+	makeConfusionActions();
+	
+	onPlayerWalk();
+	
+	updateStateSteps(state:$State);
+	
+	showAddedStates();
+	
+	showRemovedStates();
+	
+	/** fix to 20 now */
+	stepsForTurn():number;
+	
+	turnEndOnMap();
+	
+	checkFloorEffect();
+	
+	executeFloorDamage();
+	
+	/**fix to 20 now */
+	basicFloorDamage():number;
+	
+	maxFloorDamage():number;
+	
+	performMapDamage();
+	
+	inputtingAction();
+	
+	selectNextCommand():boolean;
+	
+	selectPreviousCommand():boolean;
+	
+	/** TODO: type? */
+	lastMenuSkill():$Skill;
+	
+	setLastMenuSkill(skill:$Skill);
+	
+	lastBattleSkill():$Skill;
+	
+	setLastBattleSkill(skill:$Skill);
+	
+	lastCommandSymbol():string;
+	
+	setLastCommandSymbol(symbol:string);
+
+}
+/**The wrapper class for an actor array. */
+declare class Game_Actors{
+	initialize();
+	
+	actor(actorId:number):Game_Actor;
+}
+/**The superclass of Game_Actor and Game_Enemy. It contains methods for sprites
+ and actions. */
+declare class Game_Battler extends Game_BattlerBase{
+	constructor();
+	
+	clearAnimations();
+	
+	clearDamagePopup();
+	
+	clearWeaponAnimation();
+	
+	clearEffect();
+	
+	clearMotion();
+	
+	requestEffect(effectType:any);
+	
+	requestMotion(motionType:any);
+	
+	requestMotionRefresh();
+	
+	select();
+	
+	deselect();
+	
+	isAnimationRequested():boolean;
+	
+	isDamagePopupRequested():boolean;
+	
+	isEffectRequested():boolean;
+	
+	isMotionRequested():boolean;
+	
+	isWeaponAnimationRequested():boolean;
+	
+	isMotionRefreshRequested():boolean;
+	
+	isSelected():boolean;
+	
+	effectType():any;
+	
+	motionType():any;
+	
+	weaponImageId():number;
+	
+	shiftAnimation():any;
+	
+	startAnimation();
+	
+	startDamagePopup();
+	
+	startWeaponAnimation(weaponImageId:number);
+	
+	/**TODO: return type correct? */
+	action(index:number):Game_Action;
+	
+	setAction(index:number, action:Game_Action);
+	
+	/**action count */
+	numActions():number;
+	
+	clearActions();
+	
+	result():Game_ActionResult;
+	
+	clearResult();
+	
+	addState(stateId:number);
+	
+	/** */
+	isStateAddable(stateId:number):boolean;
+	
+	isStateRestrict(stateId:number):boolean;
+	
+	removeState(stateId:number);
+	
+	escape();
+	
+	addBuff(paramId:number, turns:number);
+	
+	addDebuff(paramId:number, turns:number);
+	
+	removeBuff(paramId:number);
+	
+	removeBattleStates();
+	
+	removeAllBuffs();
+	
+	removeStatesAuto(timing:number);
+	
+	removeBuffsAuto();
+	
+	removeStatesByDamage();
+	
+	makeActionTimes():number;
+	
+	makeActions();
+	
+	speed():number;
+	
+	makeSpeed();
+	
+	currentAction():Game_Action;
+	
+	removeCurrentAction();
+	
+	/**TODO: type correct? */
+	setLastTarget(target:Game_Actor);
+	
+	forceAction(skillId:number, targetIndex:number);
+	
+	/**
+	 * use the specified item(include skill)
+	 * 
+	 * @param {Useable} item can be item or skill 
+	 */
+	useItem(item:Usable);
+	
+	gainHp(value:number);
+	
+	gainMp(value:number);
+	
+	gainTp(value:number);
+	
+	gainSilentTp(value:number);
+	
+	/**0-25之间的随机数 */
+	initTp(value:number);
+	
+	clearTp();
+	
+	chargeTpByDamage(damageRage:number);
+	
+	regenerateHp();
+	
+	maxSlipDamage():number;
+	
+	regenerateMp();
+	
+	regenerateTp();
+	
+	
+	/** hp, mp, tp if alive*/
+	regenerateAll();
+	
+	/**do some init  */
+	onBattleStart();
+	
+	/**    this.clearResult();
+    this.removeStatesAuto(1);
+    this.removeBuffsAuto(); */
+	onAllActionsEnd();
+	
+	/**
+    this.clearResult();
+    this.regenerateAll();
+    this.updateStateTurns();
+    this.updateBuffTurns();
+    this.removeStatesAuto(2);
+	 */
+	onTurnEnd();
+	
+	/**clear some state */
+	onBattleEnd();
+	
+	onDamage(value:number);
+	
+	setActionState(actionState:string);
+	
+	/** if state==undecided */
+	isUndecided():boolean;
+	
+	/** if state==inputting */	
+	isInputting():boolean;
+	
+	/** if state==waiting */
+	isWaiting():boolean;
+	
+	isActing():boolean;
+	
+	/**TODO: 吟唱中？ */
+	isChanting():boolean;
+	
+	isGuardWaiting():boolean;
+	
+	performActionStart(action:Game_Action);
+	
+	/**do notihing now */
+	performAction();
+	
+	/**set state to done */
+	performActionEnd();
+	
+	/**do notihing now */
+	performDamage();
+	
+	/** play missing sound */
+	performMiss();
+
+	/** paly recovery sound */	
+	performRecovery();
+	
+	/** play evasion sound */
+	performEvasion();
+	
+	/** play magic evasion sound */
+	performMagicEvasion();
+	
+	/**play  evasion sound */
+	performCounter();
+	
+	/** play reflection sound */
+	performReflection();
+	
+	performSubstitute();
+	
+	performCollapse();
+}
+
 /**The superclass of Game_Battler. It mainly contains parameters calculation. 可能是敌人或者我方 */
 declare class Game_BattlerBase{
 	/** Hit Points */
@@ -2950,6 +3588,8 @@ declare class Game_BattlerBase{
 	
 	allTraits(code:number):Array<$Trait>;
 	
+	traits(code:number):Array<$Trait>;	
+	
 	traitsWithId(code:number, id:number):Array<$Trait>;
 	
 	traitsPi(code:number, id:number):number;
@@ -3124,7 +3764,7 @@ declare class Game_BattlerBase{
 	paySkillCost(skill:$Skill);
 	
 	/**物品的使用场景是否正确 */
-	isOccasionOk(item:$Item):boolean;
+	isOccasionOk(item:Usable):boolean;
 	
 	/**是否能使用物品 */
 	meetsUsableItemConditions(item:$Item):boolean;
@@ -3133,14 +3773,14 @@ declare class Game_BattlerBase{
 	
 	meetsItemConditions(item:$Item):boolean;
 	
-	canUse(item:$Item):boolean;
+	canUse(item:Usable):boolean;
 	
 	/**武器和防具可装备 */
-	canEquip(item:$Item):boolean;
+	canEquip(item:Equipment):boolean;
 	
-	canEquipWeapon(item:$Item):boolean;
+	canEquipWeapon(item:$Weapon):boolean;
 	
-	canEquipArmor(item:$Item):boolean;
+	canEquipArmor(item:$Armor):boolean;
 	
 	/**普通攻击技能id，固定1 */
 	attackSkillId():number;
@@ -3185,6 +3825,587 @@ var FLAG_ID_PRESERVE_TP  :number;
 var ICON_BUFF_START      :number;
 var ICON_DEBUFF_START    :number;
 }
+/**The superclass of Game_Player, Game_Follower, GameVehicle, and Game_Event. */
+declare class Game_Character extends Game_CharacterBase{
+	
+	memorizeMoveRoute();
+	
+	restoreMoveRoute();
+	
+	isMoveRouteForcing():boolean;	
+	
+	setMoveRoute(moveRoute:$MoveRoute);
+	
+	forceMoveRoute(moveRoute:$MoveRoute);
+	
+	updateRoutineMove();
+	
+	processMoveCommand(command:$EventCommand);
+	
+	deltaXFrom(x:number);
+	
+	deltaYFrom(y:number);
+	
+	moveRandom();
+	
+	moveTowardCharacter(character:Game_CharacterBase);
+	
+	moveAwayFromCharacter(character:Game_CharacterBase);
+	
+	turnTowardCharacter(character:Game_CharacterBase);
+	
+	turnAwayFromCharacter(character:Game_CharacterBase);
+	
+	turnTowardPlayer();
+	
+	turnAwayFromPlayer();
+	
+	moveTowardPlayer();
+	
+	moveAwayFromPlayer();
+	
+	moveForward();
+	
+	moveBackward();
+	
+	processRouteEnd();
+	
+	advanceMoveRouteIndex();
+	
+	turnRight90();
+	
+	turnLeft90();
+	
+	turn180();
+	
+	turnRightOrLeft90();
+	
+	turnRandom();
+	
+	swap(character:Game_CharacterBase);
+}
+
+
+declare module Game_Character{
+var ROUTE_END               :number;
+var ROUTE_MOVE_DOWN         :number;
+var ROUTE_MOVE_LEFT         :number;
+var ROUTE_MOVE_RIGHT        :number;
+var ROUTE_MOVE_UP           :number;
+var ROUTE_MOVE_LOWER_L      :number;
+var ROUTE_MOVE_LOWER_R      :number;
+var ROUTE_MOVE_UPPER_L      :number;
+var ROUTE_MOVE_UPPER_R      :number;
+var ROUTE_MOVE_RANDOM       :number;
+var ROUTE_MOVE_TOWARD       :number;
+var ROUTE_MOVE_AWAY         :number;
+var ROUTE_MOVE_FORWARD      :number;
+var ROUTE_MOVE_BACKWARD     :number;
+var ROUTE_JUMP              :number;
+var ROUTE_WAIT              :number;
+var ROUTE_TURN_DOWN         :number;
+var ROUTE_TURN_LEFT         :number;
+var ROUTE_TURN_RIGHT        :number;
+var ROUTE_TURN_UP           :number;
+var ROUTE_TURN_90D_R        :number;
+var ROUTE_TURN_90D_L        :number;
+var ROUTE_TURN_180D         :number;
+var ROUTE_TURN_90D_R_L      :number;
+var ROUTE_TURN_RANDOM       :number;
+var ROUTE_TURN_TOWARD       :number;
+var ROUTE_TURN_AWAY         :number;
+var ROUTE_SWITCH_ON         :number;
+var ROUTE_SWITCH_OFF        :number;
+var ROUTE_CHANGE_SPEED      :number;
+var ROUTE_CHANGE_FREQ       :number;
+var ROUTE_WALK_ANIME_ON     :number;
+var ROUTE_WALK_ANIME_OFF    :number;
+var ROUTE_STEP_ANIME_ON     :number;
+var ROUTE_STEP_ANIME_OFF    :number;
+var ROUTE_DIR_FIX_ON        :number;
+var ROUTE_DIR_FIX_OFF       :number;
+var ROUTE_THROUGH_ON        :number;
+var ROUTE_THROUGH_OFF       :number;
+var ROUTE_TRANSPARENT_ON    :number;
+var ROUTE_TRANSPARENT_OFF   :number;
+var ROUTE_CHANGE_IMAGE      :number;
+var ROUTE_CHANGE_OPACITY    :number;
+var ROUTE_CHANGE_BLEND_MODE :number;
+var ROUTE_PLAY_SE           :number;
+var ROUTE_SCRIPT            :number;
+}
+/**
+The superclass of Game_Character. It handles basic information, such as coordinates and images, shared by all characters. */
+declare class Game_CharacterBase{
+	x:number;
+	y:number;
+
+	
+	initMembers();
+	
+	pos(x:number, y:number):boolean;
+	
+	posNt(x:number, y:number):boolean;
+	
+	moveSpeed():number;
+	
+	setMoveSpeed(moveSpeed:number);
+	
+	moveFrequency():number;
+	
+	setMoveFrequency(moveFrequency:number);
+	
+	opacity():number;
+	
+	setOpacity(opacity:number);
+	
+	blendMode():number;
+	
+	setBlendMode(blendMode:number);
+	
+	isNormalPriority():boolean;
+	
+	setPriorityType(porityType:number);
+	
+	isMoving():boolean;
+	
+	isJumping():boolean;
+	
+	jumpHeight():number;
+	
+	isStopping():boolean;
+	
+	checkStop(threshold:number):boolean;
+	
+	resetStopCount();
+	
+	realMoveSpeed():number;
+	
+	distancePerFrame():number;
+	
+	isDashing():boolean;
+	
+	isDebugThrough():boolean;
+	
+	straighten();
+	
+	reverseDir(d:number);
+	
+	canPass(x:number, y:number, d:number):boolean;
+	
+	canPassDiagonally(x:number, y:number, horz:number, vert:number):boolean;
+	
+	isMapPassable(x:number, y:number, d:number):boolean;
+	
+	isCollidedWithCharacters(x:number, y:number):boolean;
+	
+	isCollidedWithEvents(x:number, y:number):boolean;
+	
+	isCollidedWithVehicles(x:number, y:number):boolean;
+	
+	setPosition(x:number, y:number);
+	
+	copyPosition(character:Game_CharacterBase);
+	
+	/**set position to (x, y) */
+	locate(x:number, y:number);
+	
+	direction():number;
+	
+	setDirection(d:number);
+	
+	isTile():boolean;
+	
+	isObjectCharacter():boolean;
+	
+	shiftY():number;
+	
+	scrolledX():number;
+	
+	scrolledY():number;
+	
+	screenX():number;
+	
+	screenY():number;
+	
+	screenZ():number;
+	
+	isNearTheScreen():boolean;
+	
+	update();
+	
+	updateStop();
+	
+	updateJump();
+	
+	updateMove();
+	
+	updateAnimation();
+	
+	animationWait();
+	
+	updateAnimationCount();
+	
+	updatePattern();
+	
+	maxPattern():number;
+	
+	pattern():number;
+	
+	setPattern(patter:number);
+	
+	/**is it 1 */
+	isOriginalPattern():number;
+	
+	/**reset to 1 */
+	resetPattern();
+	
+	refreshBushDepth();
+	
+	isOnLadder();
+	
+	isOnBush();
+	
+	terrainTag():number;
+	
+	regionId():number;
+	
+	increaseSteps();
+	
+	tileId():number;
+	
+	characterName():string;
+	
+	characterIndex():number;
+	
+	setImage(characterName:string, characterIndex:number);
+	
+	setTileImage(tileId:number);
+	
+	checkEventTriggerTouchFront(d:number);
+	
+	checkEventTriggerTouch(x:number, y:number);
+	
+	isMovementSucceeded(x:number, y:number);
+	
+	setMovementSuccess(success:boolean);
+	
+	moveStraight(d:number);
+	
+	moveDiagonally(horz:number, vert:number);
+	
+	jump(xPlus:number, yPlus:number);
+	
+	hasWalkAnime():boolean;
+	
+	setWalkAnime(walkAnime:boolean);
+	
+	hasStepAnime():boolean;
+	
+	setStepAnime(stepAnime:boolean);
+	
+	isDirectionFixed():boolean;
+	
+	setDirectionFix(directionFix:boolean);
+	
+	isThrough():boolean;
+	
+	setThrough(through:boolean);
+	
+	isTransparent():boolean;
+	
+	bushDepth():number;
+	
+	setTransparent(transparent:boolean);
+	
+	requestAnimation(animationId:number);
+	
+	requestBalloon(balloonId:number);
+	
+	animationId():number;
+	
+	balloonId():number;
+	
+	startAnimation();
+	
+	startBalloon();
+	
+	isAnimationPlaying():boolean;
+	
+	isBalloonPlaying():boolean;
+	
+	endAnimation();
+	
+	endBalloon();
+}
+/**
+ *  The game object class for a common event. It contains functionality for running parallel process events.
+ */
+declare class Game_CommonEvent{
+	constructor(commonEventId:number);
+	initialize(commonEventId:number);
+	
+	event():$CommonEvent;
+	
+	list():Array<$EventCommand>;
+	
+	refresh();
+	
+	isActive():boolean;
+	
+	update():boolean;
+}
+/**The game object class for an enemy. */
+declare class Game_Enemy extends Game_Battler{
+	setup();
+	
+	/** always be ture */
+	isEnemy():boolean;
+	
+	/** same with $gameTroop */
+	friendsUnit():Game_Troop;
+	
+	/** same with $gameParty */
+	opponentsUnit():Game_Party;
+	
+	/**index in the troop */
+	index():number;
+	
+	isBattleMember():boolean;
+	
+	enemyId():number;
+	
+	enemy():$Enemy;
+	
+	paramBase(paramID:number):any;
+	
+	exp():number;
+	
+	gold():number;
+	
+	makeDropItems():Array<$EnemyDropItem>;
+	
+	dropItemRate():number;
+	
+	/** 得到对应物品
+	 * @param {number} kind 1=道具，2= 武器， 3=护甲
+	 * @param {number} dataId 物品对应id
+	 * */
+	itemObject(kind:number, dataId:number);
+	
+	/** fixed to true now */
+	isSpriteVisible():boolean;
+	
+	screenX():number;
+	
+	screenY():number;
+	
+	battlerName():string;
+	
+	battlerHue():number;
+	
+	originalName():string;
+	
+	name():string;
+	
+	isLetterEmpty():boolean;
+	
+	setLetter(letter:string);
+	
+	setPlural(plural:boolean);
+	
+	transform(enemyId:number);
+	
+	meetsCondition(action:$EnemyAction);
+	
+	meetsTurnCondition(param1:number, param2:number):boolean;
+	
+	meetsHpCondition(param1:number, param2:number):boolean;
+	
+	meetsMpCondition(param1:number, param2:number):boolean;
+	
+	meetsStateCondition(param:number):boolean;
+	
+	meetsPartyLevelCondition(param:number):boolean;
+	
+	meetsSwitchCondition(param:number):boolean;
+	
+	isActionValid(action:$EnemyAction):boolean;
+	
+	selectAction(actionList:Array<$EnemyAction>, ratingZero:number);
+	
+	selectAllActions(actionList:Array<$EnemyAction>);
+	
+	makeActions();
+}
+/** The game object class for an event. It contains functionality for event page
+ switching and running parallel process events. */
+declare class Game_Event extends Game_Character{
+	
+	constructor(mapId:number, eventId:number);
+	
+	initialize(mapId:number, eventId:number);
+	
+	eventId():number;
+	
+	event():$Event;
+	
+	page():$EventPage;
+	
+	/** event page list */
+	list():Array<$EventPage>;
+	
+	isCollidedWithEvents():boolean;
+	
+	isCollidedWithPlayerCharacters():boolean;
+	
+	lock();
+	
+	unlock();
+	
+	updateSelfMovement();
+	
+	stopCountThreshold():number;
+	
+	moveTypeRandom();
+	
+	moveTypeTowardPlayer();
+	
+	isNearThePlayer():boolean;
+	
+	moveTypeCustom();
+	
+	isStarting():boolean;
+	
+	clearStartingFlag();
+	
+	isTriggerIn(trigger:Array<number>);
+	
+	start();
+	
+	erase();
+	
+	refresh();
+	
+	findProperPageIndex():number;
+	
+	meetsConditions(page:$EventPage):boolean;
+	
+	setupPage();
+	
+}
+/**The game object class for a follower. A follower is an allied character,
+ other than the front character, displayed in the party. */
+declare class Game_Follower{
+	
+	constructor(memberIndex:number);
+	
+	initialize(memberIndex:number);
+	
+	refresh();
+	
+	actor():Game_Actor;
+	
+	isVisible():boolean;
+	
+	chaseCharacter(character:Game_CharacterBase);
+	
+}
+/**The wrapper class for a follower array. */
+declare class Game_Followers{
+	initialize();
+	
+	isVisible():boolean;
+	
+	show():boolean;
+	
+	hide():boolean;
+	
+	follower(index:number):Game_Follower;
+	
+	forEach(callback:Function, thisObject:Object);
+	
+	reverseEach(callback:Function, thisObject:Object);
+	
+	refresh();
+	
+	update();
+}
+/** The interpreter for running event commands. */
+declare class Game_Interpreter{
+	
+	constructor(depth:number);
+	
+	initialize(depth:number);
+	
+	checkOverflow();
+	
+	clear();
+	
+	setup();
+	
+	eventId():number;
+	
+	isOnCurrentMap():boolean;
+	
+	setupReservedCommonEvent():boolean;
+	
+	isRunning():boolean;
+	
+	update();
+	
+	updateChild():boolean;
+	
+	updateWait():boolean;
+	
+	updateWaitCount():boolean;
+	
+	updateWaitMode():boolean;
+	
+	/**@param {string} waitMode can be one of ['', message,transfer , scroll, route, animation, balloon, gather,action, video, image */
+	setWaitMode(waitMode:string);
+	
+	wait(duration:number);
+	
+	/**fixed to 24 */
+	fadeSpeed():number;
+	
+	executeCommand():boolean;
+	
+	checkFreeze():boolean;
+	
+	terminate();
+	
+	skipBranch();
+	
+	currentCommand():$EventCommand;
+	
+	nextEventCode():number;
+	
+	/**@param {number} param 0: means to invode the callback on all members in $gameParty, >0: means invove the callback on that actor */
+	iterateActorId(param:number, callback:Function);
+	
+	/**@param {number} param1 the type of this call, 0: means call iterateActorId, then use params2 and callback as parameter, >0: means using $gameVariables(param2) and callback as parameter to call iterateActorId*/
+	iterateActorEx(param1:number, param2:number, callback:Function);
+	
+	iterateActorIndex(param:number, callback:Function);
+	
+	iterateEnemyIndex(param:number, callback:Function);
+	
+	iterateBattler(param1:number, param2:number, callback:Function);
+	
+	character(param:number):Game_CharacterBase;
+	
+	operateValue(operation:number, operandType:number, operand:number):number;
+	
+	changeHp(target:Game_BattlerBase, value:number, allowDeath:boolean);
+	
+	/**@return .webm/.mp4 */
+	videoFileExt():string;
+	
+	// TODO: lots of command not included
+	
+}
 /** The game object class for handling skills, items, weapons, and armor. It is
  required because save data should not include the database object itself. */
 declare class Game_Item{
@@ -3219,9 +4440,236 @@ declare class Game_Item{
 	
 	setEquip(isWeapon:boolean, itemId:number)
 }
-
+/**The game object class for a map. It contains scrolling and passage
+determination functions. */
 declare class Game_Map{
+	initialize();
 	
+	setup(mapId:number);
+	
+	isEventRunning():boolean;
+	
+	/**fixed to 48 now */
+	tileWidth():number;
+	
+	/** fixed to 48 now */
+	tileHeight():number;
+	
+	mapId():number;
+	
+	tilesetId():number;
+	
+	displayX():number;
+	
+	displayY():number;
+	
+	parallaxName():string;
+	
+	battleback1Name():string;
+	
+	
+	battleback2Name():string;
+	
+	requestRefresh(mapId:number);
+	
+	isNameDisplayEnabled():boolean;
+	
+	disableNameDisplay();
+	
+	enableNameDisplay();
+	
+	createVehicles();
+	
+	refereshVehicles();
+	
+	vehicles():Array<Game_Vehicle>;
+	
+	vehicle(type:string):Game_Vehicle;
+	
+	boat():Game_Vehicle;
+	
+	ship():Game_Vehicle;
+	
+	airship():Game_Vehicle;
+	
+	setupEvents();
+	
+	events():Array<Game_Event>;
+	
+	event(eventId:number):Game_Event;
+	
+	eraseEvent(eventId:number);
+	
+	parallelCommonEvents():Array<$CommonEvent>;
+	
+	setupScroll();
+	
+	setupParallax();
+	
+	setupBattleback();
+	
+	setDisplayPos(x:number, y:number);
+	
+	parallaxOx():number;
+	
+	parallaxOy():number;
+	
+	tileset():$Tileset;
+	
+	tilesetFlags():Array<number>;
+	
+	displayName():string;
+	
+	width():number;
+	
+	height():number;
+	
+	data():Array<any>;
+	
+	isLoopHorizontal():boolean;
+	
+	isLoopVertical():boolean;
+	
+	isDashDisabled():boolean;
+	
+	encounterList()	 :Array<$MapEncounter>;
+	
+	encounterStep():number;
+	
+	isOverworld():boolean;
+	
+	screenTileX():number;
+	
+	screenTileY():number;
+	
+	adjustX(x:number):number;
+	
+	adjustY(y:number):number;
+	
+	roundX(x:number):number;
+	
+	roundY(x:number):number;
+	
+	xWithDirection(x:number, d:number):number;
+	
+	yWithDirection(y:number, d:number):number;
+	
+	roundXWithDirection(x:number, d:number):number;
+	
+	roundYWithDirection(y:number, d:number):number;
+	
+	deltaX(x1:number, x2:number):number;
+	
+	deltaY(y1:number, y2:number);
+	
+	distance(x1:number, y1:number, x2:number, y2:number):number;
+	
+	canvasToMapX(x:number):number;
+	
+	canvasToMapY(y:number):number;
+	
+	/** play bgm */
+	autoplay();
+	
+	refreshIfNeeded();
+	
+	refresh();
+	
+	refreshTileEvents();
+	
+	eventsXy(x:number, y:number):Array<Game_Event>;
+	
+	eventsXyNt(x:number, y:number):Array<Game_Event>;
+	
+	tileEventsXy(x:number, y:number):Array<Game_Event>;
+	
+	eventIdXy(x:number, y:number):number;
+	
+	scrollDown();
+	
+	scrollLeft();
+	
+	scrollRight();
+	
+	scrollUp();
+	
+	isValid(x:number, y:number):boolean;
+	
+	checkPassage(x:number, y:number, bit:number):boolean;
+	
+	tileId(x:number, y:number, z:number):number;
+	
+	layeredTiles(x:number, y:number):Array<number>;
+	
+	allTiles(x:number, y:number):Array<number>;
+	
+	autotileType(x:number, y:number, z:number):number;
+	
+	isPassable(x:number, y:number , d:number):boolean;
+	
+	isBoatPassable(x:number, y:number):boolean;
+	
+	isShipPassable(x:number, y:number):boolean;
+	
+	isAirshipLandOk(x:number, y:number):boolean;
+	
+	checkLayeredTilesFlags(x:number, y:number, bit:number):boolean;
+	
+	isLadder(x:number, y:number):boolean;
+	
+	isBush(x:number, y:number):boolean;
+	
+	isCounter(x:number, y:number):boolean;
+	
+	isDamageFloor(x:number, y:number):boolean;
+	
+	terrainTag(x:number, y:number):number;
+	
+	regionId(x:number, y:number):number;
+	
+	/**
+	 * @param {number} direction 2=down, 4=left, 6=right, 8=up
+	 */
+	startScroll(direction:number, distance:number, spped:number);
+	
+	isScrolling():boolean;
+	
+	update();
+	
+	updateScroll();
+	
+	scrollDistance():number;
+		
+	/**
+	 * @param {number} direction 2=down, 4=left, 6=right, 8=up
+	 */
+	doScroll(direction:number, distance:number);
+	
+	updateEvents();
+	
+	updateVehicles();
+	
+	updateParallax();
+	
+	changeTileset(tilesetId:number);
+	
+	changeBattleback(battleback1Name:string, battleback2Name:string);
+	
+	changeParallax(name:string, loopX:boolean, loopY:boolean, sx:number, sy:number);
+	
+	updateInterpreter();
+	
+	unlockEvent(eventId:number);
+	
+	setupStartingEvent():boolean;
+	
+	setupTestEvent():boolean;
+	
+	setupStartingMapEvent():boolean;
+	
+	setupAutorunCommonEvent():boolean;
+	
+	isAnyEventStarting():boolean;
 }
 /**The game object class for the state of the message window that displays text
 or selections, etc. */
@@ -3308,9 +4756,156 @@ declare class Game_Message{
 	
 	/** 所有文本（即将文本数组使用\n拼接） */
 	allText():string;
-}
-declare class Game_Party{
 	
+
+}
+/** The game object class for the party. Information such as gold and items is
+ included. */
+declare class Game_Party extends Game_Unit<Game_Actor>{
+	initAllItems();
+	
+	exists():boolean;
+	
+	size():number;
+	
+	isEmpty():boolean;
+	
+	allMembers():Array<Game_Actor>;
+	
+	/** fixed to 4 now */
+	maxBattleMembers():number;
+	
+	leader():Game_Actor;
+	
+	reviveBattleMembers();
+	
+	items():Array<$Item>;
+	
+	weapons():Array<$Weapon>;
+	
+	armors():Array<$Armor>;
+	
+	equipItems():Array<Equipment>;
+
+	allItems():Array<Usable>;
+	
+	/**可为防具，武器，道具 */
+	itemContainer(item:any):any;
+	
+	setupStartingMembers();
+	
+	name():string;
+	
+	setupBattleTest();
+	
+	setupBattleTestMembers();
+	
+	setupBattleTestItems();
+	
+	highestLevel():number;
+	
+	addActor(actorId:number);
+	
+	removeActor(actorId:number);
+	
+	gold():number;
+	
+	gainGold(amount:number);
+	
+	loseGold(amount:number);
+	
+	/** now fixed to 99999999 */
+	maxGold():number;
+	
+	steps():number;
+	
+	increaseSteps();
+	
+	/**可为防具，武器，道具 */
+	numItems(item:any):number;
+	
+	/** now fixed to 99 */
+	maxItems(item:any):number;
+	
+	hasMaxItems(item:any):boolean;
+	
+	hasItem(item:any, includeEquip:boolean):boolean;
+	
+	isAnyMemberEquipped(item:Equipment):boolean;
+	
+	gainItem(item:any, amout:number, includeEquip:boolean);
+	
+	discardMembersEquip(item:Equipment, amout:number);
+	
+	loseItem(item:any, amout:number, includeEquip:boolean);
+	
+	consumeItem(item:$Item);
+	
+	canUse(item:Usable):boolean;
+	
+	canInput():boolean;
+	
+	onPlayerWalk();
+	
+	menuActor():Game_Actor;
+	
+	setMenuActor(actor:Game_Actor);
+	
+	makeMenuActorNext();
+	
+	makeMenuActorPrevious();
+	
+	targetActor():Game_Actor;
+	
+	setTargetActor(actor:Game_Actor);
+	
+	lastItem():Game_Item;
+	
+	setLastItem(item:any);
+	
+	swapOrder(index1:number, index2:number);
+	
+	/**0:characterName, 1: characterIndex */
+	charactersForSavefile():Array<any>;
+	
+	/**0:faceName, 1:faceIndex */
+	facesForSavefile():Array<any>;
+	
+	partyAbility(abilityId:boolean):boolean;
+	
+	hasEncounterHalf():boolean;
+	
+	hasEncounterNone():boolean;
+	
+	hasCancelSurprise():boolean;
+	
+	hasRaisePreemptive():boolean;
+	
+	hasGoldDouble():boolean;
+	
+	hasDropItemDouble():boolean;
+	
+	ratePreemptive(troopAgi:number):number;
+	
+	rateSurprise(troopAgi:number):number;
+	
+	performVictory();
+	
+	performEscape();
+	
+	removeBattleStates();
+	
+	requestMotionRefresh();
+}
+
+
+declare module Game_Party{
+var ABILITY_ENCOUNTER_HALF    :number;
+var ABILITY_ENCOUNTER_NONE   :number;
+var ABILITY_CANCEL_SURPRISE   :number;
+var ABILITY_RAISE_PREEMPTIVE :number;
+var ABILITY_GOLD_DOUBLE       :number;
+var ABILITY_DROP_ITEM_DOUBLE  :number;
 }
 /**The game object class for a picture. */
 declare class Game_Picture{
@@ -3362,7 +4957,135 @@ declare class Game_Picture{
 	
 	updateRotation();
 }
-declare class Game_Player{}
+/** The game object class for the player. It contains event starting
+ determinants and map scrolling functions. */
+declare class Game_Player extends Game_Character{
+	
+	clearTransferInfo();
+	
+	followers():Game_Followers;
+	
+	refresh();
+	
+	reserveTransfer(mapId:number, x:number, y:number, d:number, fadeType:number);
+	
+	requestMapReload();
+	
+	isTransferring():boolean;
+	
+	newMapId():number;
+	
+	fadeType():number;
+	
+	performTransfer();
+	
+	vehicle():Game_Vehicle;
+	
+	isInBoat():boolean;
+	
+	isInShip():boolean;
+	
+	isInAirship():boolean;
+	
+	isInVehicle():boolean;
+	
+	/** wali and is not forced to move */
+	isNormal():boolean;
+	
+	isDashing():boolean;
+	
+	isDebugThrough():boolean;
+	
+	isCollided(x:number, y:number):boolean;
+	
+	centerX():number;
+	
+	centerY():number;
+	
+	center(x:number, y:number):number;
+	
+	locate(x:number, y:number);
+	
+	makeEncounterCount();
+	
+	makeEncounterTroopId():number;
+	
+	meetsEncounterConditions(encounter:$MapEncounter):boolean;
+	
+	executeEncounter():boolean;
+	
+	startMapEvent(x:number, y:number, triggers:Array<number>, normal:boolean);
+	
+	moveByInput();
+	
+	canMove():boolean;
+	
+	getInputDirection():number;
+	
+	executeMove(direction:number);
+	
+	updateDashing();
+	
+	/**shift pressed */
+	isDashButtonPressed():boolean;
+	
+	updateScroll(lastScrolledX:number, lastScrolledY:number);
+	
+	updateVehicle();
+	
+	updateVehicleGetOn();
+	
+	updateVehicleGetOff();
+	
+	updateNonmoving(wasMoving:boolean);
+	
+	triggerAction():boolean;
+	
+	triggerButtonAction():boolean;
+	
+	triggerTouchAction():boolean;
+	
+	triggerTouchActionD1(x1:number, y1:number):boolean;
+	
+	triggerTouchActionD2(x2:number, y2:number):boolean;
+	
+	triggerTouchActionD3(x2:number, y2:number):boolean;
+	
+	updateEncounterCount();
+	
+	canEncounter():boolean;
+	
+	encounterProgressValue():number;
+	
+	checkEventTriggerHere(triggers:Array<number>);
+	
+	checkEventTriggerThere(triggers:Array<number>);
+	
+	checkEventTriggerTouch(x:number, y:number);
+	
+	canStartLocalEvents():boolean;
+	
+	getOnOffVehicle():boolean;
+	
+	getOnVehicle():boolean;
+	
+	getOffVehicle():boolean;
+	
+	forceMoveForward();
+	
+	isOnDamageFloor():boolean;
+	
+	showFollowers();
+	
+	hideFollowers();
+	
+	gatherFollowers();
+	
+	areFollowersGathering():boolean;
+	
+	areFollowersGathered():boolean;
+	
+}
 /**
 The game object class for screen effect data, such as changes in color tone
 and flashes. */
@@ -3679,7 +5402,89 @@ declare class Game_Timer{
 	
 	onExpire();
 }
-declare class Game_Troop{}
+/**The game object class for a troop and the battle-related data. */
+declare class Game_Troop extends Game_Unit<Game_Enemy>{
+	
+	static LETTER_TABLE_HALF:Array<string>;
+ 	static LETTER_TABLE_FULL :Array<string>;
+	 
+	isEventRunning();
+	
+	updateInterpreter();
+	
+	turnCount():number;
+	
+	clear();
+	
+	troop():$Troop;
+	
+	setup(troopId:number);
+	
+	makeUniqueNames();
+	
+	letterTable():Array<string>;
+	
+	enemyNames():Array<string>;
+	
+	meetsConditions(page:$EventPage):boolean;
+	
+	setupBattleEvent();
+	
+	increaseTurn();
+	
+	expTotal():number;
+	
+	goldTotal():number;
+	
+	goldRate():number;
+	
+	makeDropItems():Array<$EnemyDropItem>;
+}
+
+
+
+/**The superclass of Game_Party and Game_Troop. */
+declare class Game_Unit<T>{
+	initialize();
+	
+	inBattle():boolean;
+	
+	members():Array<T>;
+	
+	aliveMembers():Array<T>;
+	
+	deadMembers():Array<T>;
+	
+	movableMembers():Array<T>;
+	
+	clearActions();
+	
+	agility():number;
+	
+	tgrSum():number;
+	
+	randomTarget():T;
+	
+	randomDeadTarget():T;
+	
+	smoothTarget(index:number):T;
+	
+	smoothDeadTarget(index:number):T;
+	
+	clearResults();
+	
+	onBattleStart();
+	
+	onBattleEnd();
+	
+	makeActions();
+	
+	select(activeMember:T);
+	
+	isAllDead():boolean;
+	
+	substituteBattler():T;
+}
 /**The game object class for variables.
  */
 declare class Game_Variables{
@@ -3692,6 +5497,66 @@ declare class Game_Variables{
 	setValue(variableId:number, value:number);
 	
 	onChange();
+}
+/** The game object class for a vehicle. */
+declare class Game_Vehicle extends Game_Character{
+	
+	constructor(type:string);
+	
+	initialize(type:string);
+	
+	isBoat():boolean;
+	
+	isShip():boolean;
+	
+	isAirship():boolean;
+	
+	resetDirection();
+	
+	initMoveSpeed();
+	
+	vehicle():$SystemVehicle;
+	
+	loadSystemSettings();
+	
+	refresh();
+	
+	setLocation(mapId:number, x:number, y:number);
+	
+	isMapPassable(x:number, y:number, d:number):boolean;
+	
+	getOn();
+	
+	getOff();
+	
+	setBgm(bgm:$AudioFile);
+	
+	playBgm();
+	
+	syncWithPlayer();
+	
+	shadowX();
+	
+	shadowY();
+	
+	shadowOpacity():number;
+	
+	canMove():boolean;
+	
+	updateAirship();
+	
+	updateAirshipAltitude();
+	
+	maxAltitude():number;
+	
+	isLowest():number;
+	
+	isHighest():number;
+	
+	isTakeoffOk():boolean;
+	
+	isLandOk():boolean;
+	
 }
 declare var $dataActors       :Array<$Actor>;
 declare var $dataClasses      :Array<$Class>;

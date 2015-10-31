@@ -187,6 +187,8 @@ declare class Game_BattlerBase{
 	
 	allTraits(code:number):Array<$Trait>;
 	
+	traits(code:number):Array<$Trait>;	
+	
 	traitsWithId(code:number, id:number):Array<$Trait>;
 	
 	traitsPi(code:number, id:number):number;
@@ -361,7 +363,7 @@ declare class Game_BattlerBase{
 	paySkillCost(skill:$Skill);
 	
 	/**物品的使用场景是否正确 */
-	isOccasionOk(item:$Item):boolean;
+	isOccasionOk(item:Usable):boolean;
 	
 	/**是否能使用物品 */
 	meetsUsableItemConditions(item:$Item):boolean;
@@ -370,14 +372,14 @@ declare class Game_BattlerBase{
 	
 	meetsItemConditions(item:$Item):boolean;
 	
-	canUse(item:$Item):boolean;
+	canUse(item:Usable):boolean;
 	
 	/**武器和防具可装备 */
-	canEquip(item:$Item):boolean;
+	canEquip(item:Equipment):boolean;
 	
-	canEquipWeapon(item:$Item):boolean;
+	canEquipWeapon(item:$Weapon):boolean;
 	
-	canEquipArmor(item:$Item):boolean;
+	canEquipArmor(item:$Armor):boolean;
 	
 	/**普通攻击技能id，固定1 */
 	attackSkillId():number;

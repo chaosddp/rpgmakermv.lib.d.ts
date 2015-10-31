@@ -70,7 +70,7 @@ declare class Game_Actor extends Game_Battler{
 	
 	changeEquip(soltId:number, item:Equipment);
 	
-	forceChangeEquip(slotId:number, item:Equiment);
+	forceChangeEquip(slotId:number, item:Equipment);
 	
 	/** the items can be weapon, armor, and item */
 	tradeItemWithParty(newItem:any, oldItem:any);
@@ -183,5 +183,58 @@ declare class Game_Actor extends Game_Battler{
 	isSpriteVisible():boolean;
 	
 	performAttack():boolean;
+	
+	performVictory();
+	
+	performEscape();
+	
+	makeActionList();
+	
+	makeAutoBattleActions();
+	
+	makeConfusionActions();
+	
+	onPlayerWalk();
+	
+	updateStateSteps(state:$State);
+	
+	showAddedStates();
+	
+	showRemovedStates();
+	
+	/** fix to 20 now */
+	stepsForTurn():number;
+	
+	turnEndOnMap();
+	
+	checkFloorEffect();
+	
+	executeFloorDamage();
+	
+	/**fix to 20 now */
+	basicFloorDamage():number;
+	
+	maxFloorDamage():number;
+	
+	performMapDamage();
+	
+	inputtingAction();
+	
+	selectNextCommand():boolean;
+	
+	selectPreviousCommand():boolean;
+	
+	/** TODO: type? */
+	lastMenuSkill():$Skill;
+	
+	setLastMenuSkill(skill:$Skill);
+	
+	lastBattleSkill():$Skill;
+	
+	setLastBattleSkill(skill:$Skill);
+	
+	lastCommandSymbol():string;
+	
+	setLastCommandSymbol(symbol:string);
 
 }

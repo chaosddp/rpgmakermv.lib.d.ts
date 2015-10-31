@@ -61,7 +61,7 @@ declare class Game_Battler extends Game_BattlerBase{
 	
 	clearActions();
 	
-	result():any;
+	result():Game_ActionResult;
 	
 	clearResult();
 	
@@ -186,7 +186,7 @@ declare class Game_Battler extends Game_BattlerBase{
 	performActionStart(action:Game_Action);
 	
 	/**do notihing now */
-	performAction():
+	performAction();
 	
 	/**set state to done */
 	performActionEnd();
