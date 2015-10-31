@@ -105,7 +105,7 @@ declare class Game_Battler extends Game_BattlerBase{
 	removeCurrentAction();
 	
 	/**TODO: type correct? */
-	setLastTarget(target:Game_Actor);
+	setLastTarget(target:Game_Battler);
 	
 	forceAction(skillId:number, targetIndex:number);
 	

@@ -53,4 +53,16 @@ declare class Game_Event extends Game_Character{
 	
 	setupPage();
 	
+	clearPageSettings();
+	
+	setupPageSettings();
+	
+	resetPattern();
+	
+	checkEventTriggerTouch(x:number, y:number);
+	
+	checkEventTriggerAuto();
+	
+	updateParallel();
+	
 }

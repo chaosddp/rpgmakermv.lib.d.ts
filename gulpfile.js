@@ -12,9 +12,7 @@ gulp.task("default", function(){
 	gulp.src(["src/ref.txt"
 			,"src/from doc/*.d.ts"
 			,"src/json/*.d.ts"
-			, "src/from source/objects/*.d.ts"
-			, "src/from source/globals.d.ts"
-			, "src/from source/managers/*.d.ts"])
+			, "src/from source/*/*.d.ts"])
 		.pipe(concat("rpgmakermv.lib.d.ts"))
 		.pipe(gulp.dest("output"));
 });

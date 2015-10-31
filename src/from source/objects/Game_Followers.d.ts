@@ -17,4 +17,22 @@ declare class Game_Followers{
 	refresh();
 	
 	update();
+	
+	updateMove();
+	
+	jumpAll();
+	
+	synchronize(x:number, y:number, d:number);
+	
+	gather();
+	
+	areGathering():boolean;
+	
+	visibleFollowers():Array<Game_Follower>;
+	
+	areMoving():boolean;
+	
+	areGathered():boolean;
+	
+	isSomeoneCollided():boolean;
 }

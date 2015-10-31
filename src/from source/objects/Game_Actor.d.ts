@@ -218,7 +218,7 @@ declare class Game_Actor extends Game_Battler{
 	
 	performMapDamage();
 	
-	inputtingAction();
+	inputtingAction():Game_Action;
 	
 	selectNextCommand():boolean;
 	

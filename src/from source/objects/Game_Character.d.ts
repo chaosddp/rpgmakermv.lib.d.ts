@@ -56,6 +56,10 @@ declare class Game_Character extends Game_CharacterBase{
 	turnRandom();
 	
 	swap(character:Game_CharacterBase);
+	
+	findDirectionTo(goalX:number, goalY:number):number;
+	
+	searchLimit():number;
 }
 
 

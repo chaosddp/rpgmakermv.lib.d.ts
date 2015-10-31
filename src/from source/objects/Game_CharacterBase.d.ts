@@ -119,7 +119,7 @@ declare class Game_CharacterBase{
 	setPattern(patter:number);
 	
 	/**is it 1 */
-	isOriginalPattern():number;
+	isOriginalPattern():boolean;
 	
 	/**reset to 1 */
 	resetPattern();

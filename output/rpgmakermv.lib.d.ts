@@ -2663,6 +2663,781 @@ declare class $Weapon extends Equipment{
 	/**武器类型的ID。 */
 	wtypeId:number;
 }
+/**The static class that handles BGM, BGS, ME and SE. */
+declare module AudioManager{
+	var bgmVolume:number;
+	var bgsVolume:number;
+	var meVolume:number;
+	var seVolume:number;
+	
+	function playBgm(bgm:$AudioFile, pos:number);
+	
+	function replayBgm(bgm:$AudioFile);
+	
+	function isCurrentBgm(bgm:$AudioFile):boolean;
+	
+	function updateBgmParameters(bgm:$AudioFile);
+	
+	function updateCurrentBgm(bgm:$AudioFile, pos:number);
+	
+	function stopBgm();
+	
+	function fadeOutBgm(duration:number);
+	
+	function fadeInBgm(duration:number);
+	
+	function playBgs(bgs:$AudioFile, pos:number);
+	
+	function replayBgs(bgs:$AudioFile);
+	
+	function isCurrentBgs(bgs:$AudioFile):boolean;
+	
+	function updateBgsParameters(bgs:$AudioFile);
+	
+	function updateCurrentBgs(bgs:$AudioFile, pos:number);
+	
+	function stopBgs();
+	
+	function fadeOutBgs(duration:number);
+	function fadeInBgs(duration:number);
+	
+	function playMe(me:$AudioFile);
+	
+	function updateMeParameters(me:$AudioFile);
+	
+	function fadeOutMe(duration:number);
+	
+	function stopMe();
+	
+	function playSe(se:$AudioFile);
+	
+	function updateSeParameters(buffer, se:$AudioFile);
+	
+	function stopSe();
+	
+	function playStaticSe(se:$AudioFile);
+	
+	function loadStaticSe(se:$AudioFile);
+	
+	function isStaticSe(se:$AudioFile):boolean;
+	
+	function stopAll();
+	
+	/**保存当前bgm的状态，用于下次恢复 */
+	function saveBgm():AudioObject;
+	
+	function saveBgs():AudioObject;
+	
+	function makeEmptyAudioObject():AudioObject;
+	
+	/**创建html5Audio/webaudio用于缓冲 */
+	function createBuffer(folder:string, name:string):any;
+	
+	function updateBufferParameters(buffer, configVolume, audio);
+	
+	/**.ogg/.m4a */
+	function audioFileExt():string;
+	
+	function shouldUseHtml5Audio():boolean;
+	
+	function checkErrors();
+	
+	function checkWebAudioError();
+}
+
+declare class AudioObject{
+	name:string;
+	volume:number;
+	pitch:number;
+	pan:number;
+	pos:number;
+}
+/**The static class that manages battle progress. */
+declare module BattleManager{
+	
+	function setup(troopId:number, canEscape:boolean, canLose:boolean);
+	
+	function initMembers();
+	
+	function isBattleTest():boolean;
+	
+	function setBattleTest(battleTest:boolean);
+	
+	function setEventCallback(callback:Function);
+	
+	function setLogWindow(logWindow:Window_BattleLog);
+	
+	function setStatusWindow(statusWindow:Window_BattleStatus);
+	
+	function setSpriteset(spriteset:Spriteset_Battle);
+	
+	function onEncounter();
+	
+	function ratePreemptive():number;
+	
+	function rateSurprise():number;
+	
+	function saveBgmAndBgs();
+	
+	function playBattleBgm();
+	
+	function playVictoryMe();
+	
+	function playDefeatMe();
+	
+	function replayBgmAndBgs();
+	
+	function makeEscapeRatio():number;
+	
+	function update();
+	
+	function updateEvent():boolean;
+	
+	function updateEventMain():boolean;
+	
+	function isBusy():boolean;
+	
+	function isInputting():boolean;
+	
+	function isInTurn():boolean;
+	
+	function isTurnEnd():boolean;
+	
+	function isAborting():boolean;
+	
+	function isBattleEnd():boolean;
+	
+	function canEscape():boolean;
+	
+	function canLose():boolean;
+	
+	function isEscaped():boolean;
+	
+	function actor():Game_Actor;
+	
+	function clearActor();
+	
+	function changeActor(newActorIndex:number, lastActorActionState:string);
+	
+	function startBattle();
+	
+	function displayStartMessages();
+	
+	function startInput();
+	
+	function inputtingAction():Game_Action;
+	
+	function selectNextCommand();
+	
+	function selectPreviousCommand();
+	
+	function refreshStatus();
+	
+	function startTurn();
+	
+	function updateTurn();
+	
+	function processTurn();
+	
+	function endTurn();
+	
+	function updateTurnEnd();
+	
+	function getNextSubject():Game_Battler;
+	
+	function allBattleMembers():Array<Game_Battler>;
+	
+	function makeActionOrders();
+	
+	function startAction();
+	
+	function updateAction();
+	
+	function endAction();
+	
+	function invokeAction(subject:Game_Battler, target:Game_Battler);
+	
+	function invokeNormalAction();
+	
+	function invokeNormalAction(subject:Game_Battler, target:Game_Battler);
+	
+	function invokeCounterAttack(subject:Game_Battler, target:Game_Battler);
+	
+	function invokeMagicReflection(subject:Game_Battler, target:Game_Battler);
+	
+	function applySubstitute(target:Game_Battler);
+	
+	function checkSubstitute(target:Game_Battler);
+	
+	function isActionForced():boolean;
+	
+	function forceAction(battler:Game_Battler);
+	
+	function processForcedAction();
+	
+	function abort();
+	
+	function checkBattleEnd():boolean;
+	
+	function checkAbort():boolean;
+	
+	function processVictory();
+	
+	function processEscape():boolean;
+	
+	function processAbort();
+	
+	function processDefeat();
+	
+	function endBattle(result:number);
+	
+	function updateBattleEnd();
+	
+	function makeRewards();
+	
+	function displayVictoryMessage();
+	
+	function displayDefeatMessage();
+	
+	function displayEscapeSuccessMessage();
+	
+	function displayEscapeFailureMessage();
+	
+	function displayRewards();
+	
+	function displayExp();
+	
+	function displayGold();
+	
+	function displayDropItems();
+	
+	function gainRewards();
+	
+	function gainExp();
+	
+	function gainGold();
+	
+	function gainDropItems();
+	
+}
+/**The static class that manages the configuration data. */
+declare module ConfigManager{
+	/** */
+	var alwaysDash:boolean;
+	
+	var commandRemember:boolean;
+	
+	var bgmVolume:number;
+	
+	var bgsVolume:number;
+	
+	var meVolume:number;
+	
+	var seVolume:number;
+	
+	function load();
+	
+	/**保存配置 */
+	function save();
+	
+	/**生成需要存档的配置对象 */
+	function makeData():ConfigData;
+	
+	/**恢复配置 */
+	function applyData(config:ConfigData);
+	
+	/**读取指定的flag */
+	function readFlag(config:ConfigData, name:string):boolean;
+	
+	/**读取指定的音量，默认100 */
+	function readVolume(config:ConfigData, name:string):number;
+}
+
+declare class ConfigData{
+	
+	commandRemember:boolean;
+	bgmVolume:number;
+	bgsVolume:number;
+	meVolume:number;
+	seVolume:number;
+	alwaysDash: boolean;
+}
+
+/**The static class that manages the database and game objects. */
+declare module DataManager{
+	/**TODO：待验证：尝试添加额外的json文件，有默认实现解析，直接用name访问 */
+	var _databaseFiles:Array<DatabaseFileConfigItem>;
+	
+	/**读取_databaseFiles定义的文件并解析 */
+	function loadDatabase();
+	
+	/**
+	 * 加载指定文件，并在window对象上添加对应的属性名
+	 * 
+	 * @param {string} name 附加到window对象时对应的属性名
+	 * @param {string} src json 文件名
+	 */
+	function loadDataFile(name:string, src:string);
+	
+	function isDatabaseLoaded():boolean;
+	
+	function loadMapData(mapId:number);
+	
+	function makeEmptyMap();
+	
+	function isMapLoaded():boolean;
+	
+	/**主要用于解析对象上的元数据（metadata） */
+	function onLoad(object:any);
+	
+	/**
+	 * @param {any} data 任何有note属性的对象
+	 */
+	function extractMetadata(data:any);
+	
+	function checkError();
+	
+	function isBattleTest():boolean;
+	
+	function isEventTest():boolean;
+	
+	function isSkill(item:any):boolean;
+	
+	function isItem(item:any):boolean;
+	
+	function isWeapon(item:any):boolean;
+	
+	function isArmor(item:any):boolean;
+	
+	/**初始化一些全局变量 */
+	function createGameObjects();
+	
+	function setupNewGame();
+	
+	function setupBattleTest();
+	
+	function setupEventTest();
+	
+	function loadGlobalInfo():Array<SaveFileInfo>;
+	
+	function saveGlobalInfo(info:SaveFileInfo);
+	
+	/**当前文件是否是当前游戏的（存档） */
+	function isThisGameFile(saveFileId:number):boolean;
+	
+	function isAnySavefileExists():boolean;
+	
+	function latestSavefileId():number;
+	
+	function loadAllSavefileImages();
+	
+	function loadSavefileImages(info:SaveFileInfo);
+	
+	/**最大存档文件个数，固定20 */
+	function maxSavefiles():number;
+	
+	function saveGame(saveFileId:number):boolean;
+	
+	function loadGame(saveFileId:number):boolean;
+	
+	function loadSavefileInfo(saveFileId:number):SaveFileInfo;
+	
+	function lastAccessedSavefileId():number;
+	
+	function saveGameWithoutRescue(saveFileId:number):boolean;
+	
+	function loadGameWithoutRescue(saeFileId:number):boolean;
+	
+	function selectSavefileForNewGame();
+	
+	/**生成存档时的文件信息 */
+	function makeSavefileInfo():SaveFileInfo;
+	
+	/**生成存档内容 */
+	function makeSaveContents():SaveContent;
+	
+	/** 从存档恢复 */
+	function extractSaveContents(content:SaveContent);
+}
+
+declare class DatabaseFileConfigItem
+{
+	/**解析后的json对象被附加在window上的名称，解析成功后即可直接用这个名字调用对象 */
+	name:string;
+	
+	/**json文件名 */
+	src:string;
+}
+
+declare class SaveFileInfo{
+	globalId:number;
+	title:string;
+	characters:Array<any>;
+	faces:Array<any>;
+	playtime:string;
+	timestamp:Date;
+}
+
+declare class SaveContent{
+	system:Game_System;
+	screen:Game_Screen;
+	timer:Game_Timer;
+	switches:Game_Switches;
+	variables:Game_Variables;
+	selfSwitches:Game_SelfSwitches;
+	actors:Game_Actors;
+	party:Game_Party;
+	map:Game_Map;
+	player:Game_Player;
+}
+/**The static class that loads images, creates bitmap objects and retains them. */
+declare module ImageManager{
+	function loadAnimation(filename:string, hue:number):Bitmap;
+	
+	function loadBattleback1(filename:string, hue:number):Bitmap;
+	
+	function loadBattleback2(filename:string, hue:number):Bitmap;
+	
+	function loadEnemy(filename:string, hue:number):Bitmap;
+	
+	function loadCharacter(filename:string, hue:number):Bitmap;
+	
+	function loadFace(filename:string, hue:number):Bitmap;
+	
+	function loadParallax(filename:string, hue:number):Bitmap;
+	
+	function loadPicture(filename:string, hue:number):Bitmap;
+	
+	function loadSvActor(filename:string, hue:number):Bitmap;
+	
+	function loadSvEnemy(filename:string, hue:number):Bitmap;
+	
+	function loadSystem(filename:string, hue:number):Bitmap;
+	
+	function loadTileset(filename:string, hue:number):Bitmap;
+	
+	function loadTitle1(filename:string, hue:number):Bitmap;
+	
+	function loadTitle2(filename:string, hue:number):Bitmap;
+	
+	/** */
+	function loadBitmap(folder:string, filename:string, hue:number, smooth:boolean):Bitmap;
+
+	function loadEmptyBitmap():Bitmap;
+	
+	function loadNormalBitmap(path:string, hue:number):Bitmap;
+	
+	/**clear cache */
+	function clear();
+	
+	function isReady():boolean;
+	
+	function isObjectCharacter(filename:string):boolean;
+	
+	function isBigCharacter(filename:string):boolean;
+	
+	function isZeroParallax(filename:string):boolean;
+}
+/**The static class that manages the plugins. */
+declare module PluginManager{
+	function setup(plugins:Array<PluginData>);
+	
+	function checkErrors();
+	
+	function parameters(name:string):Object;
+	
+	function setParameters(name:string, parameters:Object);
+	
+	function loadScript(name:string);
+	
+	function onError(e:Error);
+}
+
+declare class PluginData
+{
+	name:string;
+	status:boolean;
+	description:string;
+	parameters:Array<any>;
+}
+/**The static class that manages scene transitions. */
+declare module SceneManager{
+	function run(sceneClass:Scene_Base);
+	
+	function initialize();
+	
+	function initGraphics();
+	
+	/**@return {stirng} canvas/webgl/auto */
+	function preferableRendererType():string;
+	
+	function shouldUseCanvasRenderer():boolean;
+	
+	function checkWebGL();
+	
+	function checkFileAccess();
+	
+	function initAudio();
+	
+	function initInput();
+	
+	function initNwjs();
+	
+	function checkPluginErrors();
+	
+	function setupErrorHandlers();
+	
+	function requestUpdate();
+	
+	function update();
+	
+	/**close window */
+	function terminate();
+	
+	function onError(e:Error);
+	
+	function onKeyDown(event:KeyboardEvent);
+	
+	function catchException(e:Error);
+	
+	function tickStart();
+	
+	function tickEnd();
+	
+	function updateInputData();
+	
+	function updateMain();
+	
+	function changeScene();
+	
+	function updateScene();
+	
+	function renderScene();
+	
+	function onSceneCreate();
+	
+	function onSceneStart();
+	
+	function onSceneLoading();
+	
+	function isSceneChanging():boolean;
+	
+	function isCurrentSceneBusy():boolean;
+	
+	function isCurrentSceneStarted():boolean;
+	
+	function isNextScene():boolean;
+	
+	function isPreviousScene():boolean;
+	
+	function goto(sceneClass:Scene_Base);
+	
+	function push(sceneClass:Scene_Base);
+	
+	function pop();
+	
+	function exit();
+	
+	function clearStack();
+	
+	function stop();
+	
+	function prepareNextScene();
+	
+	function snap();
+	
+	function snapForBackground();
+	
+	function backgroundBitmap():Bitmap;
+}
+/**The static class that plays sound effects defined in the database. */
+declare module SoundManager{
+	
+	function preloadImportantSounds();
+	
+	function loadSystemSound(n:number);
+	
+	function playSystemSound(n:number);
+	
+	function playCursor();
+	
+	function playOk();
+	function playCancel();
+	function playBuzzer();
+	function playEquip();
+	function playSave();
+	function playLoad();
+	function playBattleStart();
+	function playEscape();
+	function playEnemyAttack();
+	function playEnemyDamage();
+	function playEnemyCollapse();
+	function playBossCollapse1();
+	function playBossCollapse2();
+	function playActorDamage();
+	function playActorCollapse();
+	function playRecovery();
+	function playMiss();
+	function playEvasion();
+	function playMagicEvasion();
+	function playReflection();
+	function playShop();
+	function playUseItem();
+	function playUseSkill();
+	
+}
+/**The static class that manages storage for saving game data. */
+declare module StorageManager{
+	/**保存json文件 */
+	function save(saveFileId:number, json:string);
+	
+	function load(saveFileId:number);
+	
+	
+	function exists(saveFileId:number);
+	
+	function remove(saveFileId:number);
+	
+	/**当前是否在NW.js环境中 */
+	function isLocalMode():boolean;
+	
+	/**保存文件到本地(压缩->base64) */
+	function saveToLocalFile(saveFileId:number, json:string);
+	
+	function loadFromLocalFile(saveFileId:number):string;
+	
+	function localFileExists(saveFileId:number):boolean;
+	
+	function removeLocalFile(saveFileId:number);
+	
+	/** */
+	function saveToWebStorage(saveFileId:number, json:string);
+	
+	function loadFromWebStorage(saveFileId:number):string;
+	
+	function webStorageExists(saveFileId:number):boolean;
+	
+	function removeWebStorage(saveFileId:number):boolean;
+	
+	function localFileDirectoryPath():string;
+	
+	/**
+	 * @param {number} saveFileId <0: means config.rpgsave， =0:means global.rpgsave, >0: means file{id}.rpgsave
+	 */
+	function localFilePath(saveFileId:number):string;
+	
+	/**
+	 * @param {number} saveFileId <0: return "RPG Config", =0: return "RPG Global". >0: return "RPG File{id}"
+	 */
+	function webStorageKey(saveFileId:number):string;
+}
+/** The static class that handles terms and messages. */
+declare module TextManager{
+	
+	function basic(baseId:number):string;
+	
+	function param(paramId:number):string;
+	
+	function command(commandId:number):string;
+	
+	function message(messageId:number):string;
+	
+	function getter(method:string, param:number):any;
+	
+	/**货币单位 */
+	var currencyUnit:string;
+	
+ 	var level           :string;
+   var  levelA          :string;
+   var  hp              :string;
+   var  hpA             :string;
+   var  mp              :string;
+  var   mpA             :string;
+   var  tp              :string;
+   var  tpA             :string;
+   var  exp             :string;
+   var  expA            :string;
+   var  fight           :string;
+   var  escape          :string;
+   var  attack          :string;
+   var  guard           :string;
+   var  item            :string;
+  var   skill           :string;
+   var  equip           :string;
+   var  status          :string;
+   var  formation       :string;
+  var   save            :string;
+  var   gameEnd         :string;
+  var   options         :string;
+  var   weapon          :string;
+  var   armor           :string;
+  var   keyItem         :string;
+  var   equip2          :string;
+   var  optimize        :string;
+  var   clear           :string;
+  var   newGame         :string;
+  var   continue_       :string;
+  var   toTitle         :string;
+  var   cancel          :string;
+  var   buy             :string;
+  var   sell            :string;
+  var   alwaysDash      :string;
+  var   commandRemember :string;
+  var   bgmVolume       :string;
+  var   bgsVolume       :string;
+  var   meVolume        :string;
+  var   seVolume        :string;
+  var   possession      :string;
+  var   expTotal        :string;
+  var   expNext         :string;
+  var   saveMessage     :string;
+  var   loadMessage     :string;
+  var   file            :string;
+  var   partyName       :string;
+  var   emerge          :string;
+  var   preemptive      :string;
+  var   surprise        :string;
+  var   escapeStart     :string;
+  var   escapeFailure   :string;
+   var  victory         :string;
+  var  defeat          :string;
+  var   obtainExp       :string;
+  var   obtainGold      :string;
+  var   obtainItem      :string;
+  var   levelUp         :string;
+  var   obtainSkill     :string;
+  var   useItem         :string;
+  var   criticalToEnemy :string;
+  var   criticalToActor :string;
+  var   actorDamage     :string;
+  var   actorRecovery   :string;
+  var   actorGain       :string;
+  var   actorLoss       :string;
+  var   actorDrain      :string;
+ var    actorNoDamage   :string;
+ var    actorNoHit      :string;
+ var    enemyDamage     :string;
+  var   enemyRecovery   :string;
+  var   enemyGain       :string;
+  var   enemyLoss       :string;
+  var   enemyDrain      :string;
+ var    enemyNoDamage   :string;
+  var   enemyNoHit      :string;
+  var   evasion         :string;
+  var   magicEvasion    :string;
+  var   magicReflection :string;
+  var   counterAttack   :string;
+  var   substitute      :string;
+  var   buffAdd         :string;
+  var   debuffAdd       :string;
+  var   buffRemove      :string;
+  var   actionFailure   :string;
+	
+}
+
+
+
+declare class Scene_Base{}
 /** The game object class for a battle action. */
 declare class Game_Action{
 	constructor(subject:Game_BattlerBase, forcing:boolean);
@@ -3154,7 +3929,7 @@ declare class Game_Actor extends Game_Battler{
 	
 	performMapDamage();
 	
-	inputtingAction();
+	inputtingAction():Game_Action;
 	
 	selectNextCommand():boolean;
 	
@@ -3287,7 +4062,7 @@ declare class Game_Battler extends Game_BattlerBase{
 	removeCurrentAction();
 	
 	/**TODO: type correct? */
-	setLastTarget(target:Game_Actor);
+	setLastTarget(target:Game_Battler);
 	
 	forceAction(skillId:number, targetIndex:number);
 	
@@ -3883,6 +4658,10 @@ declare class Game_Character extends Game_CharacterBase{
 	turnRandom();
 	
 	swap(character:Game_CharacterBase);
+	
+	findDirectionTo(goalX:number, goalY:number):number;
+	
+	searchLimit():number;
 }
 
 
@@ -4055,7 +4834,7 @@ declare class Game_CharacterBase{
 	setPattern(patter:number);
 	
 	/**is it 1 */
-	isOriginalPattern():number;
+	isOriginalPattern():boolean;
 	
 	/**reset to 1 */
 	resetPattern();
@@ -4293,6 +5072,18 @@ declare class Game_Event extends Game_Character{
 	
 	setupPage();
 	
+	clearPageSettings();
+	
+	setupPageSettings();
+	
+	resetPattern();
+	
+	checkEventTriggerTouch(x:number, y:number);
+	
+	checkEventTriggerAuto();
+	
+	updateParallel();
+	
 }
 /**The game object class for a follower. A follower is an allied character,
  other than the front character, displayed in the party. */
@@ -4330,6 +5121,24 @@ declare class Game_Followers{
 	refresh();
 	
 	update();
+	
+	updateMove();
+	
+	jumpAll();
+	
+	synchronize(x:number, y:number, d:number);
+	
+	gather();
+	
+	areGathering():boolean;
+	
+	visibleFollowers():Array<Game_Follower>;
+	
+	areMoving():boolean;
+	
+	areGathered():boolean;
+	
+	isSomeoneCollided():boolean;
 }
 /** The interpreter for running event commands. */
 declare class Game_Interpreter{
@@ -5558,32 +6367,17 @@ declare class Game_Vehicle extends Game_Character{
 	isLandOk():boolean;
 	
 }
-declare var $dataActors       :Array<$Actor>;
-declare var $dataClasses      :Array<$Class>;
-declare var $dataSkills       :Array<$Skill>;
-declare var $dataItems        :Array<$Item>;
-declare var $dataWeapons      :Array<$Weapon>;
-declare var $dataArmors       :Array<$Armor>;
-declare var $dataEnemies      :Array<$Enemy>;
-declare var $dataTroops       :Array<$Troop>;
-declare var $dataStates       :Array<$State>;
-declare var $dataAnimations   :Array<$Animation>;
-declare var $dataTilesets     :Array<$Tileset>;
-declare var $dataCommonEvents :Array<$CommonEvent>;
-declare var $dataSystem       :$System; // TODO: correct?
-declare var $dataMapInfos     :Array<$MapInfo>;
-declare var $dataMap          :$Map;
-declare var $gameTemp         :Game_Temp;
-declare var $gameSystem       :Game_System;
-declare var $gameScreen       :Game_Screen;
-declare var $gameTimer        :Game_Timer;
-declare var $gameMessage      :Game_Message;
-declare var $gameSwitches     :Game_Switches;
-declare var $gameVariables    :Game_Variables;
-declare var $gameSelfSwitches :Game_SelfSwitches;
-declare var $gameActors       :Game_Actors;
-declare var $gameParty        :Game_Party;
-declare var $gameTroop        :Game_Troop;
-declare var $gameMap          :Game_Map;
-declare var $gamePlayer       :Game_Player;
-//declare var $testEven;
+
+declare class Window_Base{
+	
+}
+
+declare class Window_BattleLog{}
+
+declare class Window_BattleStatus{}
+
+declare class Spriteset_Base{
+	
+}
+
+declare class Spriteset_Battle{}
